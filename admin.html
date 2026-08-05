@@ -16,6 +16,9 @@
   }
   textarea{ min-height:70px; resize:vertical; }
   input[type=color]{ height:42px; padding:2px; cursor:pointer; }
+  select{ width:100%; background:#000; border:1px solid var(--line-strong); color:var(--paper); font-family:var(--font-body); font-size:14px; padding:10px 12px; }
+  .page-row{ border:1px solid var(--line); padding:16px; margin-top:12px; }
+  .page-row h4{ font-family:var(--font-display); font-size:13px; text-transform:uppercase; color:var(--paper); margin-bottom:10px; }
   .row2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   .item{ border:1px solid var(--line); padding:16px; margin-top:12px; position:relative; }
   .item .del, .list-del{ position:absolute; top:10px; right:10px; background:var(--accent); color:#fff; border:none; font-family:var(--font-mono); font-size:10px; padding:4px 8px; cursor:pointer; }
@@ -73,6 +76,12 @@
         <div><label>Accent</label><input type="color" id="theme_accent"></div>
         <div><label>Accent (hover/dim)</label><input type="color" id="theme_accentDim"></div>
       </div>
+    </div>
+
+    <div class="panel">
+      <h3>Page Backgrounds & Layout</h3>
+      <span class="drag-hint">Set a different background photo and text placement for each tab</span>
+      <div id="pages_list"></div>
     </div>
 
     <div class="panel">
@@ -200,6 +209,7 @@ function fillForm() {
   if (a.photo) { $("about_photo_thumb").src = "assets/" + a.photo; $("about_photo_thumb").style.display = "block"; }
   renderTags();
 
+  renderPagesList();
   renderExperienceList();
   renderProjectsList();
   renderSkillsList();
@@ -235,6 +245,36 @@ $("coursework_new").addEventListener("keydown", (e) => {
     renderTags();
   }
 });
+
+const PAGE_LABELS = { about: "About", experience: "Experience", projects: "Projects", skills: "Skills", contact: "Contact" };
+function renderPagesList() {
+  const wrap = $("pages_list");
+  wrap.innerHTML = "";
+  Object.keys(content.pages).forEach((key) => {
+    const cfg = content.pages[key];
+    const row = document.createElement("div");
+    row.className = "page-row";
+    row.innerHTML = `
+      <h4>${PAGE_LABELS[key] || key}</h4>
+      <label>Background photo (upload, optional)</label>
+      <input type="file" accept="image/*" data-bgfile>
+      ${cfg.background ? `<img src="assets/${escAttr(cfg.background)}" class="thumb">` : `<small class="hint">No background set — uses default black grid.</small>`}
+      <label>Text placement</label>
+      <select data-align>
+        <option value="left"${cfg.align === "left" ? " selected" : ""}>Left (default)</option>
+        <option value="center"${cfg.align === "center" ? " selected" : ""}>Center</option>
+      </select>`;
+    row.querySelector("[data-bgfile]").addEventListener("change", async (e) => {
+      if (e.target.files[0]) {
+        const filename = await queueImageUpload(e.target.files[0]);
+        cfg.background = filename;
+        renderPagesList();
+      }
+    });
+    row.querySelector("[data-align]").addEventListener("change", (e) => { cfg.align = e.target.value; });
+    wrap.appendChild(row);
+  });
+}
 
 function renderExperienceList() {
   const wrap = $("experience_list");

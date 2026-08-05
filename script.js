@@ -10,6 +10,7 @@
     .then((r) => r.json())
     .then((data) => {
       applyTheme(data.theme);
+      applyPageStyle(data.pages);
       renderAbout(data.about);
       renderExperience(data.experience);
       renderProjects(data.projects);
@@ -23,6 +24,24 @@
     const root = document.documentElement.style;
     if (theme.accent) root.setProperty("--accent", theme.accent);
     if (theme.accentDim) root.setProperty("--accent-dim", theme.accentDim);
+  }
+
+  function applyPageStyle(pages) {
+    if (!pages) return;
+    const pageName = document.body.dataset.page;
+    const cfg = pages[pageName];
+    if (!cfg) return;
+    const main = document.querySelector("main");
+    if (!main) return;
+    if (cfg.background) {
+      main.style.backgroundImage =
+        "linear-gradient(rgba(10,10,10,0.86), rgba(10,10,10,0.86)), url('assets/" + cfg.background + "')";
+      main.style.backgroundSize = "cover";
+      main.style.backgroundPosition = "center";
+    }
+    if (cfg.align === "center") {
+      main.classList.add("align-center");
+    }
   }
 
   function renderAbout(a) {

@@ -174,3 +174,14 @@ footer{ padding:48px 0 80px; text-align:center; font-family:var(--font-mono); fo
 /* ---------- Images (added for editor) ---------- */
 .about-photo{ max-width:220px; border:1px solid var(--line-strong); margin-bottom:32px; display:block; }
 .proj-img{ width:100%; height:180px; object-fit:cover; border-bottom:1px solid var(--line-strong); margin-bottom:16px; }
+
+/* ---------- Per-page background + alignment (added for editor) ---------- */
+main{ background-repeat:no-repeat; }
+main.align-center{ text-align:center; }
+main.align-center .hero-cta{ justify-content:center; }
+main.align-center .tag-row{ justify-content:center; }
+main.align-center .sheet-label{ justify-content:center; }
+main.align-center .about-grid{ text-align:left; }
+main.align-center .proj-grid{ text-align:left; }
+main.align-center .xp-item{ text-align:left; }
+main.align-center .contact-block{ text-align:left; }
