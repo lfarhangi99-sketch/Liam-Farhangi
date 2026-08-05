@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DEBUG</title>
+<style>
+  body{ font-family:monospace; background:#111; color:#0f0; padding:20px; white-space:pre-wrap; word-break:break-all; }
+  h2{ color:#fff; margin-top:30px; }
+  .fail{ color:#f55; }
+  .ok{ color:#5f5; }
+  textarea{ width:100%; height:200px; background:#000; color:#0f0; }
+</style>
+</head>
+<body>
+<h1>SITE DEBUG PAGE</h1>
+<div id="out">Running checks...</div>
+
+<script>
+const out = document.getElementById("out");
+function log(html) { out.innerHTML += html + "\n"; }
+
+async function check(path) {
+  try {
+    const res = await fetch(path + "?_=" + Date.now());
+    const text = await res.text();
+    log(`<h2>${path}</h2>`);
+    log(`Status: <span class="${res.ok ? 'ok' : 'fail'}">${res.status} ${res.ok ? 'OK' : 'FAILED'}</span>`);
+    log(`Content-Type: ${res.headers.get('content-type')}`);
+    log(`Length: ${text.length} chars`);
+    log(`First 300 chars:`);
+    log(`<textarea readonly>${text.slice(0, 300).replace(/</g,'&lt;')}</textarea>`);
+  } catch (e) {
+    log(`<h2>${path}</h2><span class="fail">FETCH ERROR: ${e.message}</span>`);
+  }
+}
+
+(async () => {
+  out.innerHTML = "";
+  await check("style.css");
+  await check("script.js");
+  await check("content.json");
+  await check("index.html");
+  log("<h2>Done. Screenshot this whole page and send it back.</h2>");
+})();
+</script>
+</body>
+</html>
