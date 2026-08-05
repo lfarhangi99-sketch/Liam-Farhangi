@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Editor — L.O.F</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  main{ padding:100px 0 80px; max-width:820px; margin:0 auto; }
+  .panel{ border:1px solid var(--line-strong); background:rgba(242,242,240,0.02); padding:24px; margin-bottom:24px; }
+  .panel h3{ font-family:var(--font-display); font-size:16px; text-transform:uppercase; margin-bottom:16px; color:var(--accent); }
+  label{ display:block; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; color:var(--steel); text-transform:uppercase; margin:14px 0 6px; }
+  input[type=text], input[type=email], input[type=password], input[type=color], textarea{
+    width:100%; background:#000; border:1px solid var(--line-strong); color:var(--paper);
+    font-family:var(--font-body); font-size:14px; padding:10px 12px;
+  }
+  textarea{ min-height:70px; resize:vertical; }
+  input[type=color]{ height:42px; padding:2px; cursor:pointer; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .item{ border:1px solid var(--line); padding:16px; margin-top:12px; position:relative; }
+  .item .del, .list-del{ position:absolute; top:10px; right:10px; background:var(--accent); color:#fff; border:none; font-family:var(--font-mono); font-size:10px; padding:4px 8px; cursor:pointer; }
+  .add-btn{ font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; background:none; border:1px solid var(--line-strong); color:var(--paper); padding:8px 14px; cursor:pointer; margin-top:12px; }
+  .add-btn:hover{ border-color:var(--accent); color:var(--accent); }
+  .publish-bar{ position:fixed; bottom:0; left:0; right:0; background:rgba(10,10,10,0.96); border-top:1px solid var(--line-strong); padding:14px 24px; display:flex; gap:12px; align-items:center; justify-content:flex-end; z-index:100; }
+  .status{ font-family:var(--font-mono); font-size:12px; color:var(--paper-dim); margin-right:auto; }
+  .tags-edit span{ display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line-strong); padding:4px 8px; font-family:var(--font-mono); font-size:11px; margin:4px 4px 0 0; }
+  .tags-edit span button{ background:none; border:none; color:var(--accent); cursor:pointer; font-size:12px; }
+  .lock{ text-align:center; padding-top:160px; }
+  .thumb{ max-width:120px; display:block; margin-top:8px; border:1px solid var(--line-strong); }
+  small.hint{ display:block; color:var(--steel); font-size:11px; margin-top:6px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark"><b>L.O.F</b> // SITE EDITOR</div>
+    <ul class="nav-links"><li><a href="index.html">← Back to site</a></li></ul>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <div id="setup" class="panel">
+    <h3>GitHub Connection</h3>
+    <label>Repo owner</label>
+    <input type="text" id="owner" value="lfarhangi99-sketch">
+    <label>Repo name</label>
+    <input type="text" id="repo" value="Liam-Farhangi">
+    <label>Branch</label>
+    <input type="text" id="branch" value="main">
+    <label>Personal Access Token (fine-grained, Contents: Read & Write)</label>
+    <input type="password" id="token" placeholder="ghp_...">
+    <small class="hint">Saved only in this browser (localStorage). Never shared anywhere else. Create one at github.com → Settings → Developer settings → Personal access tokens.</small>
+    <button class="add-btn" id="loadBtn" style="margin-top:16px;">Load current content</button>
+  </div>
+
+  <div id="editor" style="display:none;">
+    <div class="panel">
+      <h3>Theme Colors</h3>
+      <div class="row2">
+        <div><label>Accent</label><input type="color" id="theme_accent"></div>
+        <div><label>Accent (hover/dim)</label><input type="color" id="theme_accentDim"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>About / Home</h3>
+      <label>Eyebrow line</label><input type="text" id="about_eyebrow">
+      <div class="row2">
+        <div><label>Name line 1</label><input type="text" id="about_nameLine1"></div>
+        <div><label>Name line 2</label><input type="text" id="about_nameLine2"></div>
+      </div>
+      <label>Role line</label><input type="text" id="about_role">
+      <label>Photo (upload, optional)</label>
+      <input type="file" id="about_photo_file" accept="image/*">
+      <img id="about_photo_thumb" class="thumb" style="display:none;">
+      <label>Paragraph 1</label><textarea id="about_bodyP1"></textarea>
+      <label>Paragraph 2</label><textarea id="about_bodyP2"></textarea>
+      <div class="row2">
+        <div><label>School</label><input type="text" id="about_school"></div>
+        <div><label>Degree</label><input type="text" id="about_degree"></div>
+      </div>
+      <label>GPA</label><input type="text" id="about_gpa">
+      <label>Coursework tags</label>
+      <div class="tags-edit" id="coursework_tags"></div>
+      <input type="text" id="coursework_new" placeholder="Add tag, press Enter">
+    </div>
+
+    <div class="panel">
+      <h3>Experience</h3>
+      <div id="experience_list"></div>
+      <button class="add-btn" id="add_experience">+ Add role</button>
+    </div>
+
+    <div class="panel">
+      <h3>Projects</h3>
+      <div id="projects_list"></div>
+      <button class="add-btn" id="add_project">+ Add project</button>
+    </div>
+
+    <div class="panel">
+      <h3>Skills</h3>
+      <div id="skills_list"></div>
+      <button class="add-btn" id="add_skill">+ Add skill group</button>
+    </div>
+
+    <div class="panel">
+      <h3>Contact</h3>
+      <label>Intro line</label><textarea id="contact_lede"></textarea>
+      <div class="row2">
+        <div><label>Email</label><input type="text" id="contact_email"></div>
+        <div><label>Phone (display)</label><input type="text" id="contact_phone"></div>
+      </div>
+      <div class="row2">
+        <div><label>Phone (digits only, for tel: link)</label><input type="text" id="contact_phoneHref"></div>
+        <div><label>Location</label><input type="text" id="contact_location"></div>
+      </div>
+      <div class="row2">
+        <div><label>LinkedIn label</label><input type="text" id="contact_linkedinLabel"></div>
+        <div><label>LinkedIn URL</label><input type="text" id="contact_linkedinHref"></div>
+      </div>
+      <label>Resume PDF (upload, optional)</label>
+      <input type="file" id="resume_file" accept="application/pdf">
+      <small class="hint" id="resume_current"></small>
+    </div>
+  </div>
+
+  <div style="height:80px;"></div>
+</main>
+
+<div class="publish-bar">
+  <span class="status" id="status"></span>
+  <button class="add-btn" id="publishBtn" style="display:none;">Publish changes</button>
+</div>
+
+<script>
+let content = null;
+let sha = null; // sha of content.json on GitHub, needed to update it
+const $ = (id) => document.getElementById(id);
+const statusEl = $("status");
+
+function creds() {
+  return { owner: $("owner").value.trim(), repo: $("repo").value.trim(), branch: $("branch").value.trim(), token: $("token").value.trim() };
+}
+function apiBase() { const c = creds(); return `https://api.github.com/repos/${c.owner}/${c.repo}/contents/`; }
+function authHeaders() { const c = creds(); return { Authorization: "token " + c.token, Accept: "application/vnd.github+json" }; }
+
+// restore saved connection info
+["owner","repo","branch","token"].forEach(id => { const v = localStorage.getItem("lof_"+id); if (v) $(id).value = v; });
+
+$("loadBtn").addEventListener("click", async () => {
+  ["owner","repo","branch","token"].forEach(id => localStorage.setItem("lof_"+id, $(id).value.trim()));
+  statusEl.textContent = "Loading...";
+  try {
+    const c = creds();
+    const res = await fetch(apiBase() + "content.json?ref=" + c.branch, { headers: authHeaders() });
+    if (!res.ok) throw new Error("Could not read content.json (" + res.status + "). Check token/repo/branch.");
+    const json = await res.json();
+    sha = json.sha;
+    content = JSON.parse(decodeURIComponent(escape(atob(json.content))));
+    fillForm();
+    $("setup").style.display = "none";
+    $("editor").style.display = "block";
+    $("publishBtn").style.display = "inline-block";
+    statusEl.textContent = "Loaded. Edit below, then Publish.";
+  } catch (e) {
+    statusEl.textContent = "Error: " + e.message;
+  }
+});
+
+function fillForm() {
+  $("theme_accent").value = content.theme.accent || "#E10600";
+  $("theme_accentDim").value = content.theme.accentDim || "#9C0400";
+
+  const a = content.about;
+  $("about_eyebrow").value = a.eyebrow;
+  $("about_nameLine1").value = a.nameLine1;
+  $("about_nameLine2").value = a.nameLine2;
+  $("about_role").value = a.role;
+  $("about_bodyP1").value = a.bodyP1;
+  $("about_bodyP2").value = a.bodyP2;
+  $("about_school").value = a.school;
+  $("about_degree").value = a.degree;
+  $("about_gpa").value = a.gpa;
+  if (a.photo) { $("about_photo_thumb").src = "assets/" + a.photo; $("about_photo_thumb").style.display = "block"; }
+  renderTags();
+
+  renderExperienceList();
+  renderProjectsList();
+  renderSkillsList();
+
+  const c = content.contact;
+  $("contact_lede").value = c.lede;
+  $("contact_email").value = c.email;
+  $("contact_phone").value = c.phone;
+  $("contact_phoneHref").value = c.phoneHref;
+  $("contact_location").value = c.location;
+  $("contact_linkedinLabel").value = c.linkedinLabel;
+  $("contact_linkedinHref").value = c.linkedinHref;
+  $("resume_current").textContent = c.resumeFile ? ("Current: " + c.resumeFile) : "No resume uploaded yet.";
+}
+
+function renderTags() {
+  const wrap = $("coursework_tags");
+  wrap.innerHTML = "";
+  content.about.coursework.forEach((t, i) => {
+    const span = document.createElement("span");
+    span.textContent = t + " ";
+    const btn = document.createElement("button");
+    btn.textContent = "✕";
+    btn.onclick = () => { content.about.coursework.splice(i, 1); renderTags(); };
+    span.appendChild(btn);
+    wrap.appendChild(span);
+  });
+}
+$("coursework_new").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && e.target.value.trim()) {
+    content.about.coursework.push(e.target.value.trim());
+    e.target.value = "";
+    renderTags();
+  }
+});
+
+function renderExperienceList() {
+  const wrap = $("experience_list");
+  wrap.innerHTML = "";
+  content.experience.forEach((xp, i) => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <button class="del">✕ Remove</button>
+      <label>Role</label><input type="text" data-f="role" value="${escAttr(xp.role)}">
+      <div class="row2">
+        <div><label>Organization</label><input type="text" data-f="org" value="${escAttr(xp.org)}"></div>
+        <div><label>Dates</label><input type="text" data-f="dates" value="${escAttr(xp.dates)}"></div>
+      </div>
+      <label>Bullets (one per line)</label>
+      <textarea data-f="bullets" style="min-height:100px;">${escHtml(xp.bullets.join("\n"))}</textarea>`;
+    div.querySelector(".del").onclick = () => { content.experience.splice(i, 1); renderExperienceList(); };
+    div.querySelectorAll("[data-f]").forEach(el => el.addEventListener("input", () => {
+      const f = el.dataset.f;
+      if (f === "bullets") xp.bullets = el.value.split("\n").map(s => s.trim()).filter(Boolean);
+      else xp[f] = el.value;
+    }));
+    wrap.appendChild(div);
+  });
+}
+$("add_experience").onclick = () => { content.experience.push({ role: "New Role", org: "Organization", dates: "MM/YYYY — Present", bullets: [] }); renderExperienceList(); };
+
+function renderProjectsList() {
+  const wrap = $("projects_list");
+  wrap.innerHTML = "";
+  content.projects.forEach((p, i) => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <button class="del">✕ Remove</button>
+      <label>Title</label><input type="text" data-f="title" value="${escAttr(p.title)}">
+      <label>Role / dates</label><input type="text" data-f="role" value="${escAttr(p.role)}">
+      <label>Image (upload, optional)</label>
+      <input type="file" accept="image/*" data-imgfile>
+      ${p.image ? `<img src="assets/${escAttr(p.image)}" class="thumb">` : ""}
+      <label>Paragraphs (one per line)</label>
+      <textarea data-f="paragraphs" style="min-height:100px;">${escHtml(p.paragraphs.join("\n"))}</textarea>
+      <label>Stack / footer line</label><input type="text" data-f="stack" value="${escAttr(p.stack || "")}">`;
+    div.querySelector(".del").onclick = () => { content.projects.splice(i, 1); renderProjectsList(); };
+    div.querySelectorAll("[data-f]").forEach(el => el.addEventListener("input", () => {
+      const f = el.dataset.f;
+      if (f === "paragraphs") p.paragraphs = el.value.split("\n").map(s => s.trim()).filter(Boolean);
+      else p[f] = el.value;
+    }));
+    const imgInput = div.querySelector("[data-imgfile]");
+    imgInput.addEventListener("change", async () => {
+      if (imgInput.files[0]) {
+        const filename = await queueImageUpload(imgInput.files[0]);
+        p.image = filename;
+      }
+    });
+    wrap.appendChild(div);
+  });
+}
+$("add_project").onclick = () => { content.projects.push({ title: "New Project", role: "Role · dates", image: "", paragraphs: [], stack: "" }); renderProjectsList(); };
+
+function renderSkillsList() {
+  const wrap = $("skills_list");
+  wrap.innerHTML = "";
+  content.skills.forEach((s, i) => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <button class="del">✕ Remove</button>
+      <div class="row2">
+        <div><label>Symbol</label><input type="text" data-f="sym" value="${escAttr(s.sym)}"></div>
+        <div><label>Group name</label><input type="text" data-f="head" value="${escAttr(s.head)}"></div>
+      </div>
+      <label>Tags (comma separated)</label>
+      <input type="text" data-f="tags" value="${escAttr(s.tags.join(", "))}">`;
+    div.querySelector(".del").onclick = () => { content.skills.splice(i, 1); renderSkillsList(); };
+    div.querySelectorAll("[data-f]").forEach(el => el.addEventListener("input", () => {
+      const f = el.dataset.f;
+      if (f === "tags") s.tags = el.value.split(",").map(x => x.trim()).filter(Boolean);
+      else s[f] = el.value;
+    }));
+    wrap.appendChild(div);
+  });
+}
+$("add_skill").onclick = () => { content.skills.push({ sym: "◇", head: "New Group", tags: [] }); renderSkillsList(); };
+
+// pending binary uploads (images/resume) queued until Publish
+let pendingFiles = []; // {path, base64}
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result.split(",")[1]);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+async function queueImageUpload(file) {
+  const safe = Date.now() + "_" + file.name.replace(/[^a-zA-Z0-9.\-_]/g, "");
+  const base64 = await fileToBase64(file);
+  pendingFiles.push({ path: "assets/" + safe, base64 });
+  statusEl.textContent = "Image queued: " + safe + " (will upload on Publish)";
+  return safe;
+}
+$("about_photo_file").addEventListener("change", async (e) => {
+  if (e.target.files[0]) {
+    const filename = await queueImageUpload(e.target.files[0]);
+    content.about.photo = filename;
+    $("about_photo_thumb").src = URL.createObjectURL(e.target.files[0]);
+    $("about_photo_thumb").style.display = "block";
+  }
+});
+$("resume_file").addEventListener("change", async (e) => {
+  if (e.target.files[0]) {
+    const filename = await queueImageUpload(e.target.files[0]);
+    content.contact.resumeFile = filename;
+    $("resume_current").textContent = "Will upload: " + filename;
+  }
+});
+
+function escAttr(s) { return String(s == null ? "" : s).replace(/"/g, "&quot;"); }
+function escHtml(s) { return String(s == null ? "" : s).replace(/</g, "&lt;"); }
+
+function collectForm() {
+  content.theme.accent = $("theme_accent").value;
+  content.theme.accentDim = $("theme_accentDim").value;
+
+  const a = content.about;
+  a.eyebrow = $("about_eyebrow").value;
+  a.nameLine1 = $("about_nameLine1").value;
+  a.nameLine2 = $("about_nameLine2").value;
+  a.role = $("about_role").value;
+  a.bodyP1 = $("about_bodyP1").value;
+  a.bodyP2 = $("about_bodyP2").value;
+  a.school = $("about_school").value;
+  a.degree = $("about_degree").value;
+  a.gpa = $("about_gpa").value;
+
+  const c = content.contact;
+  c.lede = $("contact_lede").value;
+  c.email = $("contact_email").value;
+  c.phone = $("contact_phone").value;
+  c.phoneHref = $("contact_phoneHref").value;
+  c.location = $("contact_location").value;
+  c.linkedinLabel = $("contact_linkedinLabel").value;
+  c.linkedinHref = $("contact_linkedinHref").value;
+}
+
+$("publishBtn").addEventListener("click", async () => {
+  collectForm();
+  statusEl.textContent = "Publishing...";
+  try {
+    // 1. upload any queued binary files first
+    for (const f of pendingFiles) {
+      await putFile(f.path, f.base64, "Add/update " + f.path);
+    }
+    pendingFiles = [];
+    // 2. update content.json
+    const jsonStr = JSON.stringify(content, null, 2);
+    const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
+    const res = await putFile("content.json", b64, "Update site content", sha);
+    sha = res.content.sha;
+    statusEl.textContent = "Published! Refresh the live site in ~30 seconds.";
+  } catch (e) {
+    statusEl.textContent = "Error: " + e.message;
+  }
+});
+
+async function putFile(path, base64Content, message, existingSha) {
+  const c = creds();
+  // check if file already exists to get its sha (needed to overwrite)
+  let fileSha = existingSha;
+  if (!fileSha) {
+    const check = await fetch(apiBase() + path + "?ref=" + c.branch, { headers: authHeaders() });
+    if (check.ok) { const j = await check.json(); fileSha = j.sha; }
+  }
+  const body = { message, content: base64Content, branch: c.branch };
+  if (fileSha) body.sha = fileSha;
+  const res = await fetch(apiBase() + path, { method: "PUT", headers: { ...authHeaders(), "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error("Failed to save " + path + ": " + (err.message || res.status)); }
+  return res.json();
+}
+</script>
+</body>
+</html>
