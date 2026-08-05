@@ -1,14 +1,29 @@
 {
   "theme": {
-    "accent": "#E10600",
-    "accentDim": "#9C0400"
+    "accent": "#e10600",
+    "accentDim": "#9c0400"
   },
   "pages": {
-    "about": { "background": "", "align": "left" },
-    "experience": { "background": "", "align": "left" },
-    "projects": { "background": "", "align": "left" },
-    "skills": { "background": "", "align": "left" },
-    "contact": { "background": "", "align": "left" }
+    "about": {
+      "background": "",
+      "align": "center"
+    },
+    "experience": {
+      "background": "",
+      "align": "left"
+    },
+    "projects": {
+      "background": "",
+      "align": "left"
+    },
+    "skills": {
+      "background": "",
+      "align": "left"
+    },
+    "contact": {
+      "background": "",
+      "align": "left"
+    }
   },
   "about": {
     "eyebrow": "Mechanical Engineering — Stevens Institute of Technology",
@@ -17,23 +32,57 @@
     "role": "Design Engineer / CAD / Aerospace",
     "photo": "",
     "grid1": [
-      { "k": "Discipline", "v": "Mechanical Eng." },
-      { "k": "Focus", "v": "Aerospace CAD & Design", "accent": true },
-      { "k": "Institution", "v": "Stevens Inst. of Tech." },
-      { "k": "Grad", "v": "05 / 2028" }
+      {
+        "k": "Discipline",
+        "v": "Mechanical Eng."
+      },
+      {
+        "k": "Focus",
+        "v": "Aerospace CAD & Design",
+        "accent": true
+      },
+      {
+        "k": "Institution",
+        "v": "Stevens Inst. of Tech."
+      },
+      {
+        "k": "Grad",
+        "v": "05 / 2028"
+      }
     ],
     "grid2": [
-      { "k": "Location", "v": "Hoboken, NJ" },
-      { "k": "GPA", "v": "3.58 / 4.00" },
-      { "k": "Scale", "v": "1 : 1" },
-      { "k": "Sheet", "v": "1 OF 5" }
+      {
+        "k": "Location",
+        "v": "Hoboken, NJ"
+      },
+      {
+        "k": "GPA",
+        "v": "3.58 / 4.00"
+      },
+      {
+        "k": "Scale",
+        "v": "1 : 1"
+      },
+      {
+        "k": "Sheet",
+        "v": "1 OF 5"
+      }
     ],
     "bodyP1": "I'm a mechanical engineering student at Stevens Institute of Technology, and most of what I know about design I learned by making the part first and drawing it second. I spend my week split between the machine shop and the CAD workstation — running mills and lathes on one side, modeling and tolerancing on the other — which is exactly the loop I want to keep running in aerospace: design something, understand how it's actually manufactured, and make it better because of that.",
     "bodyP2": "As President & Chief Engineer of Stevens' SAE BAJA Racing Team, I lead the design, manufacturing, and testing of a competition off-road vehicle end to end. As Head TA for a 200-level manufacturing course, I teach GD&T, CAM, and DFM to the next group of students coming through the shop I work in.",
     "school": "Stevens Institute of Technology, Hoboken NJ",
     "degree": "B.E., Mechanical Engineering — Expected 05/2028",
     "gpa": "3.582 / 4.00",
-    "coursework": ["Thermodynamics", "Engineering Design & Systems", "Mechanics of Materials", "Data Acquisition Systems", "Circuits & Systems", "Statistics", "Physics", "Electricity & Magnetism"]
+    "coursework": [
+      "Thermodynamics",
+      "Engineering Design & Systems",
+      "Mechanics of Materials",
+      "Data Acquisition Systems",
+      "Circuits & Systems",
+      "Statistics",
+      "Physics",
+      "Electricity & Magnetism"
+    ]
   },
   "experience": [
     {
@@ -90,10 +139,46 @@
     }
   ],
   "skills": [
-    { "sym": "⌖", "head": "CAD & Programming", "tags": ["SolidWorks", "Fusion 360", "MATLAB", "C++", "Python", "Arduino"] },
-    { "sym": "⏚", "head": "Machining & Fabrication", "tags": ["Milling", "Lathe", "Welding (MIG/TIG/Stick)", "Laser & Plasma Cutting", "3D Printing"] },
-    { "sym": "⊕", "head": "Software", "tags": ["Bambu Studio", "FireControl", "Microsoft Office"] },
-    { "sym": "⌀", "head": "Certifications", "tags": ["ClickSafety Welding Supervisor", "PADI Scuba Diving"] }
+    {
+      "sym": "⌖",
+      "head": "CAD & Programming",
+      "tags": [
+        "SolidWorks",
+        "Fusion 360",
+        "MATLAB",
+        "C++",
+        "Python",
+        "Arduino"
+      ]
+    },
+    {
+      "sym": "⏚",
+      "head": "Machining & Fabrication",
+      "tags": [
+        "Milling",
+        "Lathe",
+        "Welding (MIG/TIG/Stick)",
+        "Laser & Plasma Cutting",
+        "3D Printing"
+      ]
+    },
+    {
+      "sym": "⊕",
+      "head": "Software",
+      "tags": [
+        "Bambu Studio",
+        "FireControl",
+        "Microsoft Office"
+      ]
+    },
+    {
+      "sym": "⌀",
+      "head": "Certifications",
+      "tags": [
+        "ClickSafety Welding Supervisor",
+        "PADI Scuba Diving"
+      ]
+    }
   ],
   "contact": {
     "lede": "Open to internships and entry-level roles in aerospace design engineering and CAD. Reach out any time.",
