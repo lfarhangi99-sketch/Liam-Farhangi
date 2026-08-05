@@ -23,23 +23,15 @@
 
 <main>
   <div class="wrap">
-    <div class="hero-eyebrow">Mechanical Engineering — Stevens Institute of Technology</div>
-    <h1 class="name">LIAM O.<br><span class="last">FARHANGI</span></h1>
-    <div class="hero-role">Design Engineer <span class="div">/</span> CAD <span class="div">/</span> Aerospace</div>
+    <div class="hero-eyebrow" data-bind="about.eyebrow">Mechanical Engineering — Stevens Institute of Technology</div>
+    <h1 class="name"><span data-bind="about.nameLine1">LIAM O.</span><br><span class="last" data-bind="about.nameLine2">FARHANGI</span></h1>
+    <div class="hero-role" data-bind="about.role">Design Engineer / CAD / Aerospace</div>
+
+    <div data-bind="about.photo"></div>
 
     <div class="title-block">
-      <div class="tb-row">
-        <div class="tb-cell"><span class="k">Discipline</span><span class="v">Mechanical Eng.</span></div>
-        <div class="tb-cell"><span class="k">Focus</span><span class="v accent">Aerospace CAD & Design</span></div>
-        <div class="tb-cell"><span class="k">Institution</span><span class="v">Stevens Inst. of Tech.</span></div>
-        <div class="tb-cell"><span class="k">Grad</span><span class="v">05 / 2028</span></div>
-      </div>
-      <div class="tb-row">
-        <div class="tb-cell"><span class="k">Location</span><span class="v">Hoboken, NJ</span></div>
-        <div class="tb-cell"><span class="k">GPA</span><span class="v">3.58 / 4.00</span></div>
-        <div class="tb-cell"><span class="k">Scale</span><span class="v">1 : 1</span></div>
-        <div class="tb-cell"><span class="k">Sheet</span><span class="v">1 OF 5</span></div>
-      </div>
+      <div class="tb-row" data-list="about.grid1"></div>
+      <div class="tb-row" data-list="about.grid2"></div>
     </div>
 
     <div class="hero-cta">
@@ -54,39 +46,31 @@
 
     <div class="about-grid">
       <div class="about-text">
-        <p>I'm a mechanical engineering student at <strong>Stevens Institute of Technology</strong>, and most of what I know about design I learned by making the part first and drawing it second. I spend my week split between the machine shop and the CAD workstation &mdash; running mills and lathes on one side, modeling and tolerancing on the other &mdash; which is exactly the loop I want to keep running in aerospace: design something, understand how it's actually manufactured, and make it better because of that.</p>
-        <p>As <strong>President & Chief Engineer of Stevens' SAE BAJA Racing Team</strong>, I lead the design, manufacturing, and testing of a competition off-road vehicle end to end. As <strong>Head TA</strong> for a 200-level manufacturing course, I teach GD&T, CAM, and DFM to the next group of students coming through the shop I work in.</p>
+        <p data-bind="about.bodyP1"></p>
+        <p data-bind="about.bodyP2"></p>
       </div>
 
       <div class="title-block">
         <div class="tb-row" style="grid-template-columns:1fr;">
-          <div class="tb-cell"><span class="k">School</span><span class="v">Stevens Institute of Technology, Hoboken NJ</span></div>
+          <div class="tb-cell"><span class="k">School</span><span class="v" data-bind="about.school"></span></div>
         </div>
         <div class="tb-row" style="grid-template-columns:1fr;">
-          <div class="tb-cell"><span class="k">Degree</span><span class="v">B.E., Mechanical Engineering — Expected 05/2028</span></div>
+          <div class="tb-cell"><span class="k">Degree</span><span class="v" data-bind="about.degree"></span></div>
         </div>
         <div class="tb-row" style="grid-template-columns:1fr;">
-          <div class="tb-cell"><span class="k">GPA</span><span class="v">3.582 / 4.00</span></div>
+          <div class="tb-cell"><span class="k">GPA</span><span class="v" data-bind="about.gpa"></span></div>
         </div>
       </div>
     </div>
 
     <div class="coursework">
       <span class="k">Relevant Coursework</span>
-      <div class="tag-row">
-        <span class="tag">Thermodynamics</span>
-        <span class="tag">Engineering Design & Systems</span>
-        <span class="tag">Mechanics of Materials</span>
-        <span class="tag">Data Acquisition Systems</span>
-        <span class="tag">Circuits & Systems</span>
-        <span class="tag">Statistics</span>
-        <span class="tag">Physics</span>
-        <span class="tag">Electricity & Magnetism</span>
-      </div>
+      <div class="tag-row" data-list="about.coursework"></div>
     </div>
   </div>
 </main>
 
 <footer>LIAM O. FARHANGI &mdash; MECHANICAL ENGINEERING &mdash; REV. 2026</footer>
+<script src="script.js"></script>
 </body>
 </html>

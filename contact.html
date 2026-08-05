@@ -25,29 +25,34 @@
   <div class="wrap">
     <div class="sheet-label"><span class="num">SHEET 6</span> CONTACT <span class="rule"></span></div>
     <h2 class="head">Let's talk about the next project</h2>
-    <p class="lede">Open to internships and entry-level roles in aerospace design engineering and CAD. Reach out any time.</p>
+    <p class="lede" data-bind="contact.lede"></p>
 
     <div class="contact-block">
       <div class="contact-cell">
         <span class="k">Email</span>
-        <a class="v" href="mailto:Lfarhang@stevens.edu">Lfarhang@stevens.edu</a>
+        <a class="v" data-bind="contact.email" data-href="contact.email" href="#"></a>
       </div>
       <div class="contact-cell">
         <span class="k">Phone</span>
-        <a class="v" href="tel:8454187723">845-418-7723</a>
+        <a class="v" data-bind="contact.phone" data-href="contact.phone" href="#"></a>
       </div>
       <div class="contact-cell">
         <span class="k">LinkedIn</span>
-        <a class="v" href="https://www.linkedin.com/in/liam-farhangi-606486352/" target="_blank" rel="noopener">linkedin.com/in/liam-farhangi</a>
+        <a class="v" data-bind="contact.linkedinLabel" data-href="contact.linkedin" href="#" target="_blank" rel="noopener"></a>
       </div>
       <div class="contact-cell">
         <span class="k">Location</span>
-        <span class="v">Hoboken, NJ</span>
+        <span class="v" data-bind="contact.location"></span>
       </div>
+    </div>
+
+    <div class="hero-cta" style="margin-top:24px;">
+      <a class="btn primary" data-resume href="#" download style="display:none;">Download Resume</a>
     </div>
   </div>
 </main>
 
 <footer>LIAM O. FARHANGI &mdash; MECHANICAL ENGINEERING &mdash; REV. 2026</footer>
+<script src="script.js"></script>
 </body>
 </html>

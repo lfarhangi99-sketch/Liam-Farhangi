@@ -1,0 +1,101 @@
+{
+  "theme": {
+    "accent": "#E10600",
+    "accentDim": "#9C0400"
+  },
+  "about": {
+    "eyebrow": "Mechanical Engineering — Stevens Institute of Technology",
+    "nameLine1": "LIAM O.",
+    "nameLine2": "FARHANGI",
+    "role": "Design Engineer / CAD / Aerospace",
+    "photo": "",
+    "grid1": [
+      { "k": "Discipline", "v": "Mechanical Eng." },
+      { "k": "Focus", "v": "Aerospace CAD & Design", "accent": true },
+      { "k": "Institution", "v": "Stevens Inst. of Tech." },
+      { "k": "Grad", "v": "05 / 2028" }
+    ],
+    "grid2": [
+      { "k": "Location", "v": "Hoboken, NJ" },
+      { "k": "GPA", "v": "3.58 / 4.00" },
+      { "k": "Scale", "v": "1 : 1" },
+      { "k": "Sheet", "v": "1 OF 5" }
+    ],
+    "bodyP1": "I'm a mechanical engineering student at Stevens Institute of Technology, and most of what I know about design I learned by making the part first and drawing it second. I spend my week split between the machine shop and the CAD workstation — running mills and lathes on one side, modeling and tolerancing on the other — which is exactly the loop I want to keep running in aerospace: design something, understand how it's actually manufactured, and make it better because of that.",
+    "bodyP2": "As President & Chief Engineer of Stevens' SAE BAJA Racing Team, I lead the design, manufacturing, and testing of a competition off-road vehicle end to end. As Head TA for a 200-level manufacturing course, I teach GD&T, CAM, and DFM to the next group of students coming through the shop I work in.",
+    "school": "Stevens Institute of Technology, Hoboken NJ",
+    "degree": "B.E., Mechanical Engineering — Expected 05/2028",
+    "gpa": "3.582 / 4.00",
+    "coursework": ["Thermodynamics", "Engineering Design & Systems", "Mechanics of Materials", "Data Acquisition Systems", "Circuits & Systems", "Statistics", "Physics", "Electricity & Magnetism"]
+  },
+  "experience": [
+    {
+      "role": "Machine Shop Assistant",
+      "org": "Stevens Institute of Technology",
+      "dates": "05/2025 — Present",
+      "bullets": [
+        "Collaborate with faculty, PhD, and undergraduate researchers to fabricate precision parts for a supersonic wind tunnel, wave tank, high-speed imaging device, and a Navy scale boat.",
+        "Designed and manufactured a biomass 3D printer using SolidWorks, Fusion 360, mills, lathes, and additive manufacturing equipment.",
+        "Led the acquisition and campus-wide deployment of a $100,000 laser cutter for student engineering organizations.",
+        "Maintain shop facilities and hardware inventory, manage user access, and service 30+ 3D printers and laser cutting equipment."
+      ]
+    },
+    {
+      "role": "Head Teaching Assistant",
+      "org": "Stevens Institute of Technology",
+      "dates": "09/2025 — Present",
+      "bullets": [
+        "Lead lectures and lab sessions for a 200-level engineering course covering GD&T, CAM, DFM, metrology, machining, cold forming, and welding.",
+        "Evaluate and grade student engineering drawings, CAD models, CAM toolpaths, machining operations, and final design projects."
+      ]
+    },
+    {
+      "role": "Undergraduate Researcher",
+      "org": "Metamaterials Vibrations Lab",
+      "dates": "06/2025 — 08/2025",
+      "bullets": [
+        "Researched transverse wave behavior in metallic structures and designed a crystalline unit cell structure to produce roton behavior for experimental testing.",
+        "Assembled a surface-mount machine to automate fabrication of unit cell structures and presented findings at a university technology expo."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "SAE BAJA Racing Team",
+      "role": "President & Chief Engineer · 04/2026 – Present",
+      "image": "",
+      "paragraphs": [
+        "Lead day-to-day team operations, schedule design reviews for all student-engineered parts, manage technical subteams, and overhauled the sponsorship packet for corporate outreach.",
+        "Designed and manufactured the vehicle braking system and powertrain guarding in compliance with SAE safety standards.",
+        "Train new members in welding, plasma cutting, milling, turning, and tube bending to maintain strict vehicle assembly schedules."
+      ],
+      "stack": "Previously: Secretary of Reporting & Braking Lead, 04/2025 – 04/2026"
+    },
+    {
+      "title": "Autonomous Boat Design",
+      "role": "Project Lead · 02/2025 – 05/2025",
+      "image": "",
+      "paragraphs": [
+        "Led a student engineering team through brainstorming, planning, and rapid prototyping of an autonomous boat, designing the hull and internal wiring architecture.",
+        "Used CFD and FEA to test and iterate 3D-printed hull and electronics housing designs, culminating in a full technical report and presentation."
+      ],
+      "stack": "SolidWorks · CFD · FEA · 3D Printing"
+    }
+  ],
+  "skills": [
+    { "sym": "⌖", "head": "CAD & Programming", "tags": ["SolidWorks", "Fusion 360", "MATLAB", "C++", "Python", "Arduino"] },
+    { "sym": "⏚", "head": "Machining & Fabrication", "tags": ["Milling", "Lathe", "Welding (MIG/TIG/Stick)", "Laser & Plasma Cutting", "3D Printing"] },
+    { "sym": "⊕", "head": "Software", "tags": ["Bambu Studio", "FireControl", "Microsoft Office"] },
+    { "sym": "⌀", "head": "Certifications", "tags": ["ClickSafety Welding Supervisor", "PADI Scuba Diving"] }
+  ],
+  "contact": {
+    "lede": "Open to internships and entry-level roles in aerospace design engineering and CAD. Reach out any time.",
+    "email": "Lfarhang@stevens.edu",
+    "phone": "845-418-7723",
+    "phoneHref": "8454187723",
+    "linkedinLabel": "linkedin.com/in/liam-farhangi",
+    "linkedinHref": "https://www.linkedin.com/in/liam-farhangi-606486352/",
+    "location": "Hoboken, NJ",
+    "resumeFile": ""
+  }
+}
