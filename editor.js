@@ -1,6 +1,111 @@
 (function(){
   var STORAGE_KEY = 'lof_site_edits_v1';
+  var NAV_KEY = 'lof_nav_config_v1';
   var PAGE = document.body.getAttribute('data-page-id') || 'page';
+
+  var DEFAULT_NAV = [
+    { id:'about', label:'About', href:'index.html', visible:true },
+    { id:'experience', label:'Experience', href:'experience.html', visible:true },
+    { id:'projects', label:'Projects', href:'projects.html', visible:true },
+    { id:'skills', label:'Skills', href:'skills.html', visible:true },
+    { id:'contact', label:'Contact', href:'contact.html', visible:true },
+    { id:'custom1', label:'Custom Page 1', href:'custom1.html', visible:false },
+    { id:'custom2', label:'Custom Page 2', href:'custom2.html', visible:false }
+  ];
+
+  function loadNav(){
+    try{
+      var saved = JSON.parse(localStorage.getItem(NAV_KEY));
+      if(saved && saved.length) return saved;
+    }catch(e){}
+    return DEFAULT_NAV.slice();
+  }
+  function saveNav(nav){
+    localStorage.setItem(NAV_KEY, JSON.stringify(nav));
+    flashStatus('Saved');
+  }
+
+  function renderNav(){
+    var ul = document.querySelector('.nav-links');
+    if(!ul) return;
+    var nav = loadNav();
+    var currentFile = location.pathname.split('/').pop() || 'index.html';
+    ul.innerHTML = '';
+    nav.filter(function(item){ return item.visible; }).forEach(function(item){
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = item.href;
+      a.textContent = item.label;
+      if(item.href === currentFile) a.className = 'active';
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+  }
+
+  function buildNavManager(){
+    var panel = document.createElement('div');
+    panel.id = 'nav-manager';
+    panel.style.display = 'none';
+    document.body.appendChild(panel);
+
+    function redraw(){
+      var nav = loadNav();
+      var rows = nav.map(function(item, i){
+        return '<div class="nav-row" data-i="'+i+'">' +
+          '<input type="text" data-f="label" value="'+item.label.replace(/"/g,'&quot;')+'">' +
+          '<button data-a="up" title="Move up">\u2191</button>' +
+          '<button data-a="down" title="Move down">\u2193</button>' +
+          '<button data-a="toggle">'+(item.visible ? 'Hide' : 'Show')+'</button>' +
+          '</div>';
+      }).join('');
+      panel.innerHTML =
+        '<div class="nav-manager-head">Manage tabs <button id="nav-manager-close">\u00d7</button></div>' +
+        '<div class="nav-manager-body">' + rows + '</div>' +
+        '<div class="nav-manager-hint">Hidden pages (Custom Page 1/2) are blank pages you can fill in with text and images once shown.</div>';
+
+      panel.querySelectorAll('input[data-f="label"]').forEach(function(inp){
+        inp.addEventListener('input', function(){
+          var i = Number(inp.closest('.nav-row').getAttribute('data-i'));
+          var nav = loadNav();
+          nav[i].label = inp.value;
+          saveNav(nav);
+          renderNav();
+        });
+      });
+      panel.querySelectorAll('[data-a="up"]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var i = Number(btn.closest('.nav-row').getAttribute('data-i'));
+          if(i === 0) return;
+          var nav = loadNav();
+          var tmp = nav[i-1]; nav[i-1] = nav[i]; nav[i] = tmp;
+          saveNav(nav); renderNav(); redraw();
+        });
+      });
+      panel.querySelectorAll('[data-a="down"]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var i = Number(btn.closest('.nav-row').getAttribute('data-i'));
+          var nav = loadNav();
+          if(i === nav.length - 1) return;
+          var tmp = nav[i+1]; nav[i+1] = nav[i]; nav[i] = tmp;
+          saveNav(nav); renderNav(); redraw();
+        });
+      });
+      panel.querySelectorAll('[data-a="toggle"]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var i = Number(btn.closest('.nav-row').getAttribute('data-i'));
+          var nav = loadNav();
+          nav[i].visible = !nav[i].visible;
+          saveNav(nav); renderNav(); redraw();
+        });
+      });
+      panel.querySelector('#nav-manager-close').addEventListener('click', function(){
+        panel.style.display = 'none';
+      });
+    }
+    redraw();
+    panel._redraw = redraw;
+    return panel;
+  }
 
   function loadAll(){
     try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
@@ -202,12 +307,19 @@
     var bar = document.createElement('div');
     bar.id = 'edit-bar';
     bar.innerHTML =
+      '<button id="edit-manage-tabs">Manage tabs</button>' +
       '<button id="edit-export">Export backup</button>' +
       '<button id="edit-import">Import backup</button>' +
       '<input type="file" id="edit-import-file" accept="application/json">' +
       '<button id="edit-reset-page">Reset this page</button>' +
       '<span class="status" id="edit-status"></span>';
     document.body.appendChild(bar);
+
+    var navPanel = buildNavManager();
+    document.getElementById('edit-manage-tabs').addEventListener('click', function(){
+      navPanel.style.display = navPanel.style.display === 'none' ? 'block' : 'none';
+      if(navPanel._redraw) navPanel._redraw();
+    });
 
     toggle.addEventListener('click', function(){
       document.body.classList.toggle('edit-mode');
@@ -253,6 +365,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function(){
+    renderNav();
     buildToolbar();
     applyEdits();
     wireZones();

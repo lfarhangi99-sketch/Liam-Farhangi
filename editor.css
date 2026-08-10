@@ -74,3 +74,28 @@ body.edit-mode .zone-add{ display:flex; }
 .zone-add button:hover{ border-color:var(--accent); color:var(--accent); }
 
 .edit-block.removed{ display:none; }
+
+/* ---------- Nav manager ---------- */
+#nav-manager{
+  position:fixed; top:50px; right:20px; z-index:210;
+  background:#000; border:1px solid var(--accent); width:300px;
+  font-family:var(--font-mono); font-size:11px;
+}
+.nav-manager-head{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:10px 14px; border-bottom:1px solid var(--line-strong);
+  text-transform:uppercase; letter-spacing:0.06em;
+}
+.nav-manager-head button{ background:none; border:none; color:var(--paper); font-size:16px; cursor:pointer; }
+.nav-manager-body{ padding:10px 14px; max-height:280px; overflow-y:auto; }
+.nav-row{ display:flex; align-items:center; gap:6px; margin-bottom:8px; }
+.nav-row input[type=text]{
+  flex:1; background:#111; border:1px solid var(--line-strong); color:var(--paper);
+  padding:6px 8px; font-family:var(--font-mono); font-size:11px;
+}
+.nav-row button{
+  background:none; border:1px solid var(--line-strong); color:var(--paper);
+  padding:6px 8px; cursor:pointer; font-size:11px;
+}
+.nav-row button:hover{ border-color:var(--accent); color:var(--accent); }
+.nav-manager-hint{ padding:0 14px 14px; color:var(--steel); font-size:10px; line-height:1.5; }

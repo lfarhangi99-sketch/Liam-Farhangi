@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root{
   --bg: #0A0A0A;
@@ -11,8 +11,8 @@
   --line: rgba(242,242,240,0.14);
   --line-strong: rgba(242,242,240,0.30);
 
-  --font-display: 'Archivo', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: 'EB Garamond', serif;
+  --font-body: 'EB Garamond', serif;
   --font-mono: 'IBM Plex Mono', monospace;
 }
 
@@ -21,13 +21,9 @@ html{ scroll-behavior:smooth; }
 
 body{
   background:var(--bg);
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 44px 44px;
   color: var(--paper);
   font-family: var(--font-body);
-  line-height:1.5;
+  line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -50,16 +46,16 @@ nav{
 nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:56px; }
 .nav-mark{ font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; color:var(--paper-dim); }
 .nav-mark b{ color:var(--paper); font-weight:600; }
-.nav-links{ display:flex; gap:4px; list-style:none; }
-.nav-links a{
+.nav-links{ display:flex; gap:4px; list-style:none; align-items:center; }
+.nav-links a, .nav-links span.navlbl{
   font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em;
   text-decoration:none; color:var(--paper-dim); text-transform:uppercase;
-  transition:all .15s ease; padding:8px 14px; border:1px solid transparent;
+  transition:all .15s ease; padding:8px 14px; border:1px solid transparent; cursor:pointer;
 }
 .nav-links a:hover, .nav-links a:focus-visible{ color:var(--paper); border-color:var(--line-strong); }
 .nav-links a.active{ color:var(--bg); background:var(--accent); }
 .nav-links a:focus-visible{ outline:1px solid var(--accent); outline-offset:2px; }
-@media (max-width:760px){ .nav-links{ gap:0; } .nav-links a{ padding:8px 8px; font-size:10px; } .nav-mark{ display:none; } }
+@media (max-width:760px){ .nav-links a{ padding:8px 8px; font-size:10px; } .nav-mark{ display:none; } }
 
 /* ---------- Sheet label ---------- */
 .sheet-label{
@@ -84,7 +80,7 @@ main{ padding:130px 0 60px; min-height:100vh; }
 
 /* ---------- Headings ---------- */
 h1.name{
-  font-family:var(--font-display); font-weight:900; font-size:clamp(40px, 7vw, 78px);
+  font-family:var(--font-display); font-weight:600; font-size:clamp(40px, 7vw, 78px);
   line-height:0.98; letter-spacing:-0.01em; text-transform:uppercase; margin-bottom:6px;
 }
 h1.name .last{ color:transparent; -webkit-text-stroke:1px var(--paper-dim); }
@@ -100,7 +96,7 @@ h1.name .last{ color:transparent; -webkit-text-stroke:1px var(--paper-dim); }
 .hero-eyebrow::before{ content:''; width:24px; height:1px; background:var(--accent); }
 
 h2.head{
-  font-family:var(--font-display); font-weight:800; font-size:clamp(26px,4vw,38px);
+  font-family:var(--font-display); font-weight:600; font-size:clamp(26px,4vw,38px);
   text-transform:uppercase; letter-spacing:-0.01em; margin-bottom:14px;
 }
 .lede{ max-width:640px; color:var(--paper-dim); font-size:16px; margin-bottom:48px; }
@@ -142,7 +138,7 @@ h2.head{
 .proj-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--line-strong); }
 @media (max-width:760px){ .proj-grid{ grid-template-columns:1fr; } }
 .proj-card{ background:var(--bg); padding:32px; }
-.proj-card .ptitle{ font-family:var(--font-display); font-weight:800; font-size:20px; text-transform:uppercase; margin-bottom:4px; }
+.proj-card .ptitle{ font-family:var(--font-display); font-weight:600; font-size:20px; text-transform:uppercase; margin-bottom:4px; }
 .proj-card .prole{ font-family:var(--font-mono); font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px; }
 .proj-card p{ color:var(--paper-dim); font-size:14.5px; margin-bottom:10px; }
 .proj-card .stack{ margin-top:16px; font-family:var(--font-mono); font-size:11px; color:var(--steel); }
@@ -170,18 +166,3 @@ h2.head{
 .contact-cell a.v:hover{ color:var(--accent); }
 
 footer{ padding:48px 0 80px; text-align:center; font-family:var(--font-mono); font-size:11px; color:var(--steel); letter-spacing:0.08em; }
-
-/* ---------- Images (added for editor) ---------- */
-.about-photo{ max-width:220px; border:1px solid var(--line-strong); margin-bottom:32px; display:block; }
-.proj-img{ width:100%; height:180px; object-fit:cover; border-bottom:1px solid var(--line-strong); margin-bottom:16px; }
-
-/* ---------- Per-page background + alignment (added for editor) ---------- */
-main{ background-repeat:no-repeat; }
-main.align-center{ text-align:center; }
-main.align-center .hero-cta{ justify-content:center; }
-main.align-center .tag-row{ justify-content:center; }
-main.align-center .sheet-label{ justify-content:center; }
-main.align-center .about-grid{ text-align:left; }
-main.align-center .proj-grid{ text-align:left; }
-main.align-center .xp-item{ text-align:left; }
-main.align-center .contact-block{ text-align:left; }
