@@ -1,7 +1,7 @@
 // Scroll animations: reveal on scroll, counting stats, sliding strip, progress bar, hide-on-scroll nav.
 (function(){
 // Edit these to change the stat numbers on the About page
-var STATS=[{n:3.58,d:2,l:'GPA / 4.00'},{t:'Junior',l:'Mechanical Engineering'},{n:4,l:'Active roles'}];
+var STATS=[{n:3.58,d:2,l:'GPA / 4.00'},{t:'Junior',l:'Mechanical Engineering'},{n:3,l:'Active roles'}];
 var body=document.body,nav=document.querySelector('nav');
 var bar=document.createElement('div');bar.id='progress';body.appendChild(bar);
 var last=0;

@@ -92,16 +92,10 @@
     const container = target || document.querySelector("[data-list='experience']");
     if (!container || !list) return;
     let prev = null;
-    container.innerHTML = list.map((xp) => { const hd = xp.group && xp.group !== prev ? `<div class="sheet-label grp"><span class="num">${esc(xp.group)}</span><span class="rule"></span></div>` : ""; prev = xp.group || prev; return hd + `
-      <div class="xp-item">
-        <div class="xp-meta">
-          <div class="role">${esc(xp.role)}</div>
-          <div class="org">${esc(xp.org)}</div>
-          <div class="dates">${esc(xp.dates)}</div>
-        </div>
-        <div class="xp-body">
-          <ul>${(xp.bullets || []).map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
-        </div>
+    container.innerHTML = list.map((xp, i) => { const hd = xp.group && xp.group !== prev ? `<div class="sheet-label grp"><span class="num">${esc(xp.group)}</span><span class="rule"></span></div>` : ""; prev = xp.group || prev; return hd + `
+      <div class="xp-item acc${i === 0 ? " open" : ""}">
+        <button class="acc-head" aria-expanded="${i === 0}"><div class="xp-meta"><div class="role">${esc(xp.role)}</div><div class="org">${esc(xp.org)}</div><div class="dates">${esc(xp.dates)}</div></div><span class="chev">+</span></button>
+        <div class="acc-body"><div class="acc-inner"><div class="xp-body"><ul>${(xp.bullets || []).map((b) => `<li>${esc(b)}</li>`).join("")}</ul></div></div></div>
       </div>`; }).join("");
   }
 
@@ -109,13 +103,13 @@
     const container = document.querySelector("[data-list='projects']");
     if (!container || !list) return;
     container.innerHTML = list.map((p, i) => `
-      <div class="proj-card">
-        <div class="pnum">${String(i + 1).padStart(2, "0")}</div>
-        ${p.image ? `<img src="assets/${esc(p.image)}" alt="${esc(p.title)}" class="proj-img">` : ""}
-        <div class="ptitle">${esc(p.title)}</div>
-        <div class="prole">${esc(p.role)}</div>
-        ${(p.paragraphs || []).map((para) => `<p>${esc(para)}</p>`).join("")}
-        ${p.stack ? `<div class="chips">${p.stack.split(" · ").map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>` : ""}
+      <div class="proj-card acc${i === 0 ? " open" : ""}">
+        <button class="acc-head" aria-expanded="${i === 0}"><div class="ph"><div class="pnum">${String(i + 1).padStart(2, "0")}</div><div><div class="ptitle">${esc(p.title)}</div><div class="prole">${esc(p.role)}</div></div></div><span class="chev">+</span></button>
+        <div class="acc-body"><div class="acc-inner"><div class="pb">
+          ${p.image ? `<img src="assets/${esc(p.image)}" alt="${esc(p.title)}" class="proj-img">` : ""}
+          ${(p.paragraphs || []).map((para) => `<p>${esc(para)}</p>`).join("")}
+          ${p.stack ? `<div class="chips">${p.stack.split(" · ").map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>` : ""}
+        </div></div></div>
       </div>`).join("");
   }
 
@@ -147,4 +141,10 @@
 
     if (c.resumeFile) document.querySelectorAll("[data-resume]").forEach((r) => { r.href = "assets/" + c.resumeFile; });
   }
+  document.addEventListener("click", (e) => {
+    const h = e.target.closest(".acc-head"); if (!h) return;
+    const acc = h.parentNode, wasOpen = acc.classList.contains("open");
+    document.querySelectorAll(".acc.open").forEach((a) => { a.classList.remove("open"); a.querySelector(".acc-head").setAttribute("aria-expanded", "false"); });
+    if (!wasOpen) { acc.classList.add("open"); h.setAttribute("aria-expanded", "true"); }
+  });
 })();

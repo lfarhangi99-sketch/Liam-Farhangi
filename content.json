@@ -99,12 +99,16 @@
     "timeline": [
       {
         "date": "Next",
-        "title": "Aerospace internships and beyond",
-        "text": "Looking to join a team at the top of its field, pushing the envelope forward.",
+        "title": "Open to any opportunity",
+        "text": "Internships, co-ops, and full-time roles in aerospace, defense, and engineering, anywhere in the country.",
         "tags": [
-          "Aerospace"
+          "Willing to relocate"
         ],
         "links": [
+          {
+            "l": "See the map →",
+            "h": "contact.html#map"
+          },
           {
             "l": "Get in touch →",
             "h": "contact.html"
@@ -583,7 +587,7 @@
     }
   ],
   "contact": {
-    "lede": "Open to internships and entry-level roles in aerospace design engineering and CAD. Reach out any time.",
+    "lede": "Open to any internship, co-op, or full-time role in aerospace, defense, or engineering, and willing to relocate anywhere. Whatever the job, I'll bring the work ethic. Reach out any time.",
     "email": "Lfarhangi99@gmail.com",
     "phone": "845-418-7723",
     "phoneHref": "8454187723",
