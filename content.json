@@ -96,64 +96,185 @@
       "Frontiers of Tech: Biotechnology",
       "Frontiers of Tech: Quantum Technology"
     ],
-    "expertise": [
+    "timeline": [
       {
-        "sym": "⌖",
-        "head": "CAD & Design",
-        "text": "Modeling, simulation, and design for manufacturability.",
+        "date": "2020 — 2024",
+        "title": "Eagle Hill School, Massachusetts",
+        "text": "Where I found my footing in design and building. Squash captain, cross-country manager, film club president, student government, and a curriculum committee member. Hudson Valley roots, with stops in South Carolina and Massachusetts.",
         "tags": [
-          "SolidWorks (Model, FEA, CFD)",
-          "Fusion 360 (Model, CAM)",
-          "OnShape",
-          "GD&T"
+          "Leadership",
+          "Tutoring"
+        ],
+        "links": [
+          {
+            "l": "Eagle Hill School ↗",
+            "h": "https://www.eaglehill.school/",
+            "x": 1
+          }
         ]
       },
       {
-        "sym": "⏚",
-        "head": "Manufacturing",
-        "text": "Hands-on fabrication from raw stock to finished assembly.",
+        "date": "Summer 2022",
+        "title": "Camp Counselor",
+        "text": "Supervised dorms, assisted in the classroom, and taught a science class where students built and launched model rockets.",
         "tags": [
-          "Milling",
-          "Turning",
-          "Welding (MIG/TIG/Stick)",
-          "Laser & Plasma Cutting",
-          "3D Printing"
+          "Teaching",
+          "Communication"
         ]
       },
       {
-        "sym": "⊕",
-        "head": "Analysis & Testing",
-        "text": "Measuring, validating, and calculating to design with data.",
+        "date": "2023 — 2024",
+        "title": "Making things for fun",
+        "text": "Scuba certification, a leather-bound book with handmade paper, a laser-cut caffeine molecule, a forged rebar fire stand, and electroplating inspired by rocket-nozzle cooling.",
         "tags": [
-          "CMM & Metrology",
+          "Welding",
+          "Forging",
+          "Laser Cutting",
+          "Electroplating"
+        ],
+        "links": [
+          {
+            "l": "See projects →",
+            "h": "projects.html"
+          }
+        ]
+      },
+      {
+        "date": "Fall 2024",
+        "title": "Stevens Institute of Technology",
+        "text": "Started my B.E. in Mechanical Engineering. 3.58 GPA, Dean's List three semesters, now a junior.",
+        "tags": [
+          "SolidWorks",
+          "Fusion 360",
           "MATLAB",
           "Python",
-          "C++",
-          "Arduino"
+          "C++"
+        ],
+        "links": [
+          {
+            "l": "Stevens Mechanical Engineering ↗",
+            "h": "https://www.stevens.edu/school-engineering-science/departments/mechanical-engineering/undergraduate-studies",
+            "x": 1
+          },
+          {
+            "l": "Skills →",
+            "h": "skills.html"
+          }
         ]
       },
       {
-        "sym": "⌀",
-        "head": "Technical Leadership",
-        "text": "Leading teams, budgets, and sponsors for student engineering orgs.",
+        "date": "2025",
+        "title": "SAE BAJA: first builds",
+        "text": "Designed and welded drivetrain guarding, then led the braking system. Also built an automatic plant waterer and a phone-controlled door opener.",
         "tags": [
-          "Team Management",
-          "$30K Budget",
-          "Sponsorship & Grants",
+          "Arduino",
+          "3D Printing",
+          "FEA",
+          "CFD"
+        ],
+        "links": [
+          {
+            "l": "Projects →",
+            "h": "projects.html"
+          }
+        ]
+      },
+      {
+        "date": "Summer 2025",
+        "title": "Machine Shop and Metamaterials Research",
+        "text": "Joined the machine shop, machining parts for a hypersonic wind tunnel and a wave tank, and researched roton structures in a vibrations lab.",
+        "tags": [
+          "CNC Mills & Lathes",
+          "CMM",
+          "DFM",
+          "Research"
+        ],
+        "links": [
+          {
+            "l": "Experience →",
+            "h": "experience.html"
+          }
+        ]
+      },
+      {
+        "date": "Fall 2025",
+        "title": "Head Teaching Assistant",
+        "text": "Promoted after one semester to lead lectures and labs on GD&T, CAM, metrology, and welding.",
+        "tags": [
+          "GD&T",
+          "CAM",
           "Teaching"
+        ],
+        "links": [
+          {
+            "l": "Experience →",
+            "h": "experience.html"
+          }
+        ]
+      },
+      {
+        "date": "2026",
+        "title": "President of SAE BAJA",
+        "text": "Leading 40+ members and every subteam, and bringing a $100,000 fiber laser cutter to campus for student organizations.",
+        "tags": [
+          "Leadership",
+          "Budgeting",
+          "Fundraising"
+        ],
+        "links": [
+          {
+            "l": "Projects →",
+            "h": "projects.html"
+          }
+        ]
+      },
+      {
+        "date": "Next",
+        "title": "Aerospace internships and beyond",
+        "text": "Looking to join a team at the top of its field, pushing the envelope forward.",
+        "tags": [
+          "Aerospace"
+        ],
+        "links": [
+          {
+            "l": "Get in touch →",
+            "h": "contact.html"
+          }
         ]
       }
     ],
-    "education": [
+    "statements": [
       {
-        "role": "B.E., Mechanical Engineering",
-        "org": "Stevens Institute of Technology",
-        "dates": "2024 — 05/2028",
-        "bullets": [
-          "Cumulative GPA 3.582 / 4.00, Dean's List (3 semesters).",
-          "Hoboken, NJ"
-        ]
+        "head": "Why aerospace",
+        "text": "I have always been drawn to aerospace. What pulled me in was small, focused teams building machines that push the limits of what people thought possible. That idea of teamwork, close to the machine floor and moving fast, is why I've given so much time to SAE Baja and why I want to build flight hardware."
+      },
+      {
+        "head": "Always learning",
+        "text": "By the end of my sophomore year I was chosen president of the most technically challenging club on campus, taught a class covering material outside the curriculum, acquired a $100,000 machine for the school without a formal process existing, and started summer research. I know there is far more to learn, and I do my best work collaborating with others."
+      },
+      {
+        "head": "Leading SAE Baja",
+        "text": "Three years, three vehicles, each outperforming the last. I designed and built the braking system, served as recording secretary, and was elected president. I now lead 40+ members, coordinate subteams, set timelines, and oversee vehicle design, and I teach a class that takes an idea through the engineering process to a part students machine themselves on CNC equipment."
+      },
+      {
+        "head": "Earning trust",
+        "text": "I earn trust by staying methodical, dependable, and never demanding of others. In high school that meant captaining squash, managing cross-country, and leading the film club. In college it's the machine shop, teaching, and running Baja. I meet deadlines, exceed expectations, and show up for the people around me."
+      },
+      {
+        "head": "Learning outside the classroom",
+        "text": "Tools are a means to an end. My real growth has been in design: spotting clearance problems early, using standards whenever possible, defining goals and constraints before the first sketch, and applying DFM, FEA, and CFD from concept through machining, testing, and integration."
       }
+    ],
+    "beyond": [
+      "Hiking",
+      "Camping",
+      "Rafting",
+      "Long-distance running",
+      "Ultimate frisbee",
+      "Squash",
+      "Scuba diving",
+      "Foraging",
+      "Hudson Valley, NY"
     ]
   },
   "experience": [
@@ -162,31 +283,46 @@
       "org": "Stevens Institute of Technology",
       "dates": "05/2025 — Present",
       "bullets": [
-        "Machine stainless and aluminum parts for high-speed imaging use in a hypersonic wind tunnel.",
+        "Machine stainless and aluminum parts for high-speed imaging in a hypersonic wind tunnel, and built a wave actuator for a 300 ft wave tank.",
         "Designed, manufactured, and assembled 20+ parts for a biomass 3D printer motion system.",
-        "Troubleshot and repaired 30 3D printers, 3 mills, 2 lathes, and 2 welders.",
-        "Consult with students and professors on Design for Manufacturability (DFM)."
-      ]
+        "Troubleshot and repaired 30 3D printers, 3 mills, 2 lathes, and 2 welders; ran CMM inspection and sandblasting.",
+        "Work with clients to define part requirements and limits on time, cost, and tooling, then make, measure, and invoice. Increased shop throughput and cleared project backlogs.",
+        "Consult with students and professors on Design for Manufacturability (DFM). Worked 33 hours a week in summer 2025."
+      ],
+      "group": "Work Experience"
     },
     {
       "role": "Head Teaching Assistant",
       "org": "Stevens Institute of Technology",
       "dates": "09/2025 — Present",
       "bullets": [
-        "Led 10+ machining labs on CNC mills and lathes, GD&T, CMM, metrology, welding, and cold forming.",
+        "Promoted to Head TA after one semester. Led 10+ machining labs on CNC mills and lathes, GD&T, CMM, metrology, welding, and cold forming.",
         "Expand and update content, style, and flow of 10+ lectures.",
         "Instruct in weekly lectures on manufacturing, measuring, and design theory and techniques."
-      ]
+      ],
+      "group": "Work Experience"
     },
     {
       "role": "Undergraduate Researcher (Metamaterials)",
-      "org": "Stevens Institute of Technology",
+      "org": "Vibrations of Metamaterials · Stevens Institute of Technology",
       "dates": "06/2025 — 08/2025",
       "bullets": [
         "Researched metamaterials, dispersion diagrams, evanescent waves, non-reciprocity, and vibrational dynamics in elastic materials.",
         "Co-designed a roton structure to restrict vibrational energy to a narrow frequency band.",
         "Assembled and calibrated a surface-mount machine.",
         "Compiled all research into a poster and presented it to a panel of experts."
+      ],
+      "group": "Research"
+    },
+    {
+      "role": "Camp Counselor",
+      "org": "Eagle Hill School, MA",
+      "dates": "Summer 2022",
+      "group": "Earlier Experience",
+      "bullets": [
+        "Supervised students in dorms and assisted teachers with daily lesson plans.",
+        "Taught a hands-on science class where students built and launched model rockets.",
+        "Ran activities and kept transitions smooth between free time and academic sessions."
       ]
     }
   ],
@@ -199,7 +335,8 @@
         "Collaborate with all subteams to design, analyze, and manufacture 400+ parts.",
         "Spearheaded the acquisition of a $100,000 fiber laser cutter: 5 months from initial proposal to machine delivery.",
         "Managed a $30,000 semesterly budget, wrote sponsorship packets, and applied for grants and subsidies.",
-        "Present the club's objectives to 100+ students at least twice a semester."
+        "Present the club's objectives to 100+ students at least twice a semester.",
+        "Led the vehicle through three builds in three years; TIG-welded the roll cage so the tube bends before the weld breaks. Fabricated suspension parts and carbon fiber body panels, applying DFM, FEA, and CFD."
       ],
       "stack": "Leadership · Budgeting · Fundraising · Manufacturing"
     },
@@ -228,35 +365,101 @@
       "role": "Project Lead · 02/2025 – 05/2025",
       "image": "",
       "paragraphs": [
-        "Led a student team through planning and rapid prototyping of an autonomous boat, designing the hull and internal wiring architecture.",
-        "Used CFD and FEA to iterate 3D-printed hull and electronics housing designs, ending in a full technical report and presentation."
+        "Led a student team through planning and rapid prototyping of an autonomous boat. Chose a catamaran hull for stability at slow speeds after testing several designs.",
+        "Taught myself CFD to improve hydrodynamics and turning radius, simplified geometry to cut print time and supports, and wrote a full technical report and presentation."
       ],
       "stack": "SolidWorks · CFD · FEA · 3D Printing"
+    },
+    {
+      "title": "Automatic Door Opener",
+      "role": "Independent Project · 12/2024 – 06/2025",
+      "image": "",
+      "paragraphs": [
+        "Designed a mechanism that opens a dorm door from a phone app: 3D printed the parts, coded an Arduino with a servo motor, installed it, and debugged hardware and software.",
+        "Presented the project to other students, covering the process and inspiration."
+      ],
+      "stack": "SolidWorks · Arduino · 3D Printing"
+    },
+    {
+      "title": "Automatic Plant Waterer",
+      "role": "Team Lead · 12/2024",
+      "image": "",
+      "paragraphs": [
+        "Led a team of three to build a plant watering system: SolidWorks enclosure, Arduino watering logic, 3D printed housing, calibrated to water at the optimal time."
+      ],
+      "stack": "SolidWorks · Arduino · 3D Printing"
+    },
+    {
+      "title": "Electroplating",
+      "role": "Independent Research · 08/2024",
+      "image": "",
+      "paragraphs": [
+        "Inspired by electroplated fuel ducts in rocket nozzles, I read research papers and built a scaled-down setup in my garage from everyday materials.",
+        "Nickel- and copper-plated coins, a metal mug, and older welded projects, learning to substitute materials and teach myself without a classroom."
+      ],
+      "stack": "Nickel Plating · Copper Plating · Research"
+    },
+    {
+      "title": "Handmade Builds",
+      "role": "High School · 2023 – 2024",
+      "image": "",
+      "paragraphs": [
+        "A leather-bound book with recycled-newspaper paper, laser-cut wood covers, embossing, and marbled endpapers. A laser-cut caffeine molecule model.",
+        "A forged and welded rebar fire stand, using a custom jig so every bend was repeatable."
+      ],
+      "stack": "Leatherwork · Laser Cutting · Welding · Forging"
     }
   ],
   "skills": [
     {
       "sym": "⌖",
-      "head": "CAD & Programming",
+      "head": "CAD & Analysis",
       "tags": [
         "SolidWorks (Model, FEA, CFD)",
         "Fusion 360 (Model, CAM)",
         "OnShape",
+        "MD Solids",
         "MATLAB",
-        "C++",
-        "Python",
-        "Arduino"
+        "DFM",
+        "GD&T",
+        "CMM & Metrology"
+      ]
+    },
+    {
+      "sym": "⌘",
+      "head": "Programming",
+      "tags": [
+        "C++ (Intermediate)",
+        "Python (Intermediate)",
+        "Arduino",
+        "Visual Studio"
       ]
     },
     {
       "sym": "⏚",
-      "head": "Machining & Fabrication",
+      "head": "Machining",
       "tags": [
-        "3D Printing",
-        "Milling",
-        "Turning",
-        "Welding (MIG/TIG/Stick)",
-        "Laser & Plasma Cutting"
+        "CNC mills (3-axis Advanced, 4-axis Beginner)",
+        "Manual mills (Advanced)",
+        "CNC lathes (Advanced)",
+        "Manual lathes (Intermediate)",
+        "Drill press (Advanced)",
+        "Sandblasting"
+      ]
+    },
+    {
+      "sym": "⚡",
+      "head": "Fabrication & Welding",
+      "tags": [
+        "TIG (Advanced)",
+        "MIG (Intermediate)",
+        "Stick (Beginner)",
+        "Plasma cutting (Advanced)",
+        "CO₂ laser (Advanced)",
+        "Fiber laser (Intermediate)",
+        "3D printing (Advanced)",
+        "Slip roller (Intermediate)",
+        "Metal forging"
       ]
     },
     {
@@ -266,7 +469,7 @@
         "Bambu Studio",
         "FireControl",
         "DaVinci Resolve",
-        "Microsoft Office"
+        "Microsoft Excel, PowerPoint, Word"
       ]
     },
     {
@@ -286,6 +489,6 @@
     "linkedinLabel": "linkedin.com/in/liam-farhangi",
     "linkedinHref": "https://www.linkedin.com/in/liam-farhangi-606486352/",
     "location": "Hoboken, NJ · Highland, NY",
-    "resumeFile": "Liam_Farhangi_Resume.pdf"
+    "resumeFile": ""
   }
 }

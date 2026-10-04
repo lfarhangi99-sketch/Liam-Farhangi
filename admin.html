@@ -129,6 +129,13 @@
     </div>
 
     <div class="panel">
+      <h3>Advanced: Edit All Content (JSON)</h3>
+      <span class="drag-hint">Full control: timeline, statements, groups, links. Edit, then click Apply.</span>
+      <textarea id="raw_json" style="min-height:260px;font-family:var(--font-mono);font-size:12px;"></textarea>
+      <button class="add-btn" id="apply_json">Apply JSON to form</button>
+    </div>
+
+    <div class="panel">
       <h3>Contact</h3>
       <label>Intro line</label><textarea id="contact_lede"></textarea>
       <div class="row2">
@@ -169,7 +176,7 @@ function creds() {
 function apiBase() { const c = creds(); return `https://api.github.com/repos/${c.owner}/${c.repo}/contents/`; }
 function authHeaders() { const c = creds(); return { Authorization: "token " + c.token, Accept: "application/vnd.github+json" }; }
 
-// restore saved connection info
+// restore saved connection info (auto-login when a token is saved)
 ["owner","repo","branch","token"].forEach(id => { const v = localStorage.getItem("lof_"+id); if (v) $(id).value = v; });
 
 $("loadBtn").addEventListener("click", async () => {
@@ -192,7 +199,15 @@ $("loadBtn").addEventListener("click", async () => {
   }
 });
 
+let rawDirty = false;
+$("raw_json").addEventListener("input", () => { rawDirty = true; });
+function fillRaw() { rawDirty = false; $("raw_json").value = JSON.stringify(content, null, 2); }
+$("apply_json").addEventListener("click", () => {
+  try { content = JSON.parse($("raw_json").value); fillForm(); statusEl.textContent = "JSON applied. Click Publish to save."; }
+  catch (e) { statusEl.textContent = "JSON error: " + e.message; }
+});
 function fillForm() {
+  fillRaw();
   $("theme_accent").value = content.theme.accent || "#E10600";
   $("theme_accentDim").value = content.theme.accentDim || "#9C0400";
 
@@ -459,6 +474,7 @@ function collectForm() {
 }
 
 $("publishBtn").addEventListener("click", async () => {
+  if (rawDirty && !confirm("The JSON box has unapplied edits. Publish without them?")) return;
   collectForm();
   statusEl.textContent = "Publishing...";
   try {
@@ -492,6 +508,7 @@ async function putFile(path, base64Content, message, existingSha) {
   if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error("Failed to save " + path + ": " + (err.message || res.status)); }
   return res.json();
 }
+if(localStorage.getItem('lof_token')){$('loadBtn').click();}
 </script>
 </body>
 </html>

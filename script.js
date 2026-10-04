@@ -70,6 +70,13 @@
     const ed = document.querySelector("[data-list='about.education']");
     if (ed && a.education) renderExperience(a.education, ed);
 
+    const bd = document.querySelector("[data-list='about.beyond']");
+    if (bd && a.beyond) bd.innerHTML = a.beyond.map((t) => `<span class="tag">${esc(t)}</span>`).join("");
+    const st = document.querySelector("[data-list='about.statements']");
+    if (st && a.statements) st.innerHTML = a.statements.map((x) => `<div class="fcf"><div class="fcf-head">${esc(x.head)}</div><div class="fcf-body"><p class="fcf-text">${esc(x.text)}</p></div></div>`).join("");
+    const tl = document.querySelector("[data-list='about.timeline']");
+    if (tl && a.timeline) tl.innerHTML = a.timeline.map((t) => `<div class="tl-item"><div class="tl-date">${esc(t.date)}</div><div class="tl-body"><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p><div class="tag-row">${(t.tags||[]).map((g)=>`<span class="tag">${esc(g)}</span>`).join("")}</div><div class="tl-links">${(t.links||[]).map((l)=>`<a href="${esc(l.h)}"${l.x?' target="_blank" rel="noopener"':''}>${esc(l.l)}</a>`).join("")}</div></div></div>`).join("");
+
     const photoWrap = document.querySelector("[data-bind='about.photo']");
     if (photoWrap) {
       if (a.photo) { photoWrap.innerHTML = `<img src="assets/${esc(a.photo)}" alt="Photo of Liam Farhangi" class="about-photo">`; }
@@ -84,7 +91,8 @@
   function renderExperience(list, target) {
     const container = target || document.querySelector("[data-list='experience']");
     if (!container || !list) return;
-    container.innerHTML = list.map((xp) => `
+    let prev = null;
+    container.innerHTML = list.map((xp) => { const hd = xp.group && xp.group !== prev ? `<div class="sheet-label grp"><span class="num">${esc(xp.group)}</span><span class="rule"></span></div>` : ""; prev = xp.group || prev; return hd + `
       <div class="xp-item">
         <div class="xp-meta">
           <div class="role">${esc(xp.role)}</div>
@@ -94,7 +102,7 @@
         <div class="xp-body">
           <ul>${(xp.bullets || []).map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
         </div>
-      </div>`).join("");
+      </div>`; }).join("");
   }
 
   function renderProjects(list) {
@@ -137,9 +145,6 @@
     const liA = document.querySelector("[data-href='contact.linkedin']");
     if (liA) liA.href = c.linkedinHref;
 
-    document.querySelectorAll("[data-resume]").forEach((resumeA) => {
-      if (c.resumeFile) { resumeA.href = "assets/" + c.resumeFile; resumeA.style.display = ""; }
-      else { resumeA.style.display = "none"; }
-    });
+    if (c.resumeFile) document.querySelectorAll("[data-resume]").forEach((r) => { r.href = "assets/" + c.resumeFile; });
   }
 })();
