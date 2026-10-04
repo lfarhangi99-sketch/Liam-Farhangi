@@ -65,6 +65,11 @@
     const cw = document.querySelector("[data-list='about.coursework']");
     if (cw && a.coursework) cw.innerHTML = a.coursework.map((t) => `<span class="tag">${esc(t)}</span>`).join("");
 
+    const ex = document.querySelector("[data-list='about.expertise']");
+    if (ex && a.expertise) ex.innerHTML = a.expertise.map((s) => `<div class="fcf"><div class="fcf-head"><span class="sym">${esc(s.sym)}</span> ${esc(s.head)}</div><div class="fcf-body"><p class="fcf-text">${esc(s.text)}</p>${(s.tags||[]).map((t)=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div>`).join("");
+    const ed = document.querySelector("[data-list='about.education']");
+    if (ed && a.education) renderExperience(a.education, ed);
+
     const photoWrap = document.querySelector("[data-bind='about.photo']");
     if (photoWrap) {
       if (a.photo) { photoWrap.innerHTML = `<img src="assets/${esc(a.photo)}" alt="Photo of Liam Farhangi" class="about-photo">`; }
@@ -76,8 +81,8 @@
     return `<div class="tb-cell"><span class="k">${esc(cell.k)}</span><span class="v${cell.accent ? " accent" : ""}">${esc(cell.v)}</span></div>`;
   }
 
-  function renderExperience(list) {
-    const container = document.querySelector("[data-list='experience']");
+  function renderExperience(list, target) {
+    const container = target || document.querySelector("[data-list='experience']");
     if (!container || !list) return;
     container.innerHTML = list.map((xp) => `
       <div class="xp-item">
@@ -95,13 +100,14 @@
   function renderProjects(list) {
     const container = document.querySelector("[data-list='projects']");
     if (!container || !list) return;
-    container.innerHTML = list.map((p) => `
+    container.innerHTML = list.map((p, i) => `
       <div class="proj-card">
+        <div class="pnum">${String(i + 1).padStart(2, "0")}</div>
         ${p.image ? `<img src="assets/${esc(p.image)}" alt="${esc(p.title)}" class="proj-img">` : ""}
         <div class="ptitle">${esc(p.title)}</div>
         <div class="prole">${esc(p.role)}</div>
         ${(p.paragraphs || []).map((para) => `<p>${esc(para)}</p>`).join("")}
-        ${p.stack ? `<div class="stack">${esc(p.stack)}</div>` : ""}
+        ${p.stack ? `<div class="chips">${p.stack.split(" · ").map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>` : ""}
       </div>`).join("");
   }
 
@@ -131,10 +137,9 @@
     const liA = document.querySelector("[data-href='contact.linkedin']");
     if (liA) liA.href = c.linkedinHref;
 
-    const resumeA = document.querySelector("[data-resume]");
-    if (resumeA) {
+    document.querySelectorAll("[data-resume]").forEach((resumeA) => {
       if (c.resumeFile) { resumeA.href = "assets/" + c.resumeFile; resumeA.style.display = ""; }
       else { resumeA.style.display = "none"; }
-    }
+    });
   }
 })();
