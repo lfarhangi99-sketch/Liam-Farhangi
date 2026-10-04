@@ -10,7 +10,7 @@
   "pages": {
     "about": {
       "background": "1791145939614_wp11976345.jpg",
-      "align": "left"
+      "align": "center"
     },
     "experience": {
       "background": "",
@@ -521,7 +521,7 @@
   ],
   "skills": [
     {
-      "sym": "⌖",
+      "sym": "",
       "head": "CAD & Analysis",
       "tags": [
         "SolidWorks (Model, FEA, CFD)",
@@ -535,7 +535,7 @@
       ]
     },
     {
-      "sym": "⌘",
+      "sym": "",
       "head": "Programming",
       "tags": [
         "C++ (Intermediate)",
@@ -545,7 +545,7 @@
       ]
     },
     {
-      "sym": "⏚",
+      "sym": "",
       "head": "Machining",
       "tags": [
         "CNC mills (3-axis Advanced, 4-axis Beginner)",
@@ -557,7 +557,7 @@
       ]
     },
     {
-      "sym": "⚡",
+      "sym": "",
       "head": "Fabrication & Welding",
       "tags": [
         "TIG (Advanced)",
@@ -572,7 +572,7 @@
       ]
     },
     {
-      "sym": "⊕",
+      "sym": "",
       "head": "Software",
       "tags": [
         "Bambu Studio",
@@ -584,7 +584,7 @@
       ]
     },
     {
-      "sym": "⌀",
+      "sym": "",
       "head": "Certifications",
       "tags": [
         "ClickSafety Welding Supervisor",
