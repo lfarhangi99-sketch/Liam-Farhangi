@@ -1,12 +1,12 @@
 {
   "theme": {
-    "accent": "#e8223b",
-    "accentDim": "#a32638"
+    "accent": "#E8223B",
+    "accentDim": "#A32638"
   },
   "pages": {
     "about": {
-      "background": "1791138088699_wp11976345.jpg",
-      "align": "center"
+      "background": "",
+      "align": "left"
     },
     "experience": {
       "background": "",
@@ -17,11 +17,11 @@
       "align": "left"
     },
     "skills": {
-      "background": "1791138471325_360_F_142456029_GaJ0KkZu8VqUa7QiAxSCnFhO5bJtIayO.jpg",
+      "background": "",
       "align": "left"
     },
     "contact": {
-      "background": "1791138466461_black-background-with-hexagonal-shapes_1017-37481.jpg",
+      "background": "",
       "align": "left"
     }
   },

@@ -10,7 +10,7 @@ bar.style.transform='scaleX('+(h>0?y/h:0)+')';document.documentElement.style.set
 if(nav){nav.classList.toggle('nav-hide',y>last&&y>140);}last=y;},{passive:true});
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var el=e.target;el.classList.add('in');io.unobserve(el);
 if(el.classList.contains('stat'))count(el.querySelector('.n'));
-setTimeout(function(){el.classList.remove('rv','in');},1600+(parseFloat(el.style.getPropertyValue('--d'))||0)*1000);});},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+setTimeout(function(){el.classList.remove('rv','in');},1600+(parseFloat(el.style.getPropertyValue('--d'))||0)*1000);});},{threshold:0,rootMargin:'0px'});
 function count(el){if(!el.dataset.n)return;var n=+el.dataset.n,d=+el.dataset.d||0,p=el.dataset.p||'',s=el.dataset.s||'',t0=performance.now();
 (function f(t){var k=Math.min((t-t0)/1500,1),v=n*(1-Math.pow(1-k,3));el.textContent=p+v.toFixed(d)+s;if(k<1)requestAnimationFrame(f);})(t0);}
 var SEL='.sheet-label,h2.head,.lede,.about-text p,.title-block,.coursework,.xp-item,.proj-card,.fcf,.contact-cell,.about-photo,.stat,.tl-item,.fcf-text,.tag-row .tag';
@@ -21,7 +21,7 @@ if(body.dataset.page==='about'){var cta=document.querySelector('.hero-cta');
 if(cta){var st=document.createElement('div');st.className='stats';st.innerHTML=STATS.map(function(s){var n=s.t?'<div class="n">'+s.t+'</div>':'<div class="n" data-n="'+s.n+'" data-d="'+(s.d||0)+'" data-p="'+(s.p||'')+'" data-s="'+(s.s||'')+'">'+(s.p||'')+'0'+(s.s||'')+'</div>';return '<div class="stat">'+n+'<div class="l">'+s.l+'</div></div>';}).join('');
 var mq=document.createElement('div');mq.className='marquee';cta.after(st);st.after(mq);
 fetch('content.json').then(function(r){return r.json();}).then(function(c){var t=[];(c.skills||[]).forEach(function(g){t=t.concat(g.tags||[]);});
-var h=t.map(function(x){return '<span>'+x.replace(/\s*\(.*\)/,'')+'</span>';}).join('');mq.innerHTML='<div class="marquee-track">'+h+h+'</div>';}).catch(function(){});}}
+var h=t.map(function(x){return '<span>'+x.replace(/\s*\(.*\)/,'')+'</span>';}).join('');mq.innerHTML='<div class="marquee-track">'+h+h+'</div>';requestAnimationFrame(function(){var tr=mq.firstChild;tr.style.animationDuration=Math.max(60,tr.scrollWidth/2/32)+'s';});}).catch(function(){});}}
 scan();var m=document.querySelector('main'),tm;
 if(m)new MutationObserver(function(){clearTimeout(tm);tm=setTimeout(scan,40);}).observe(m,{childList:true,subtree:true});
 })();

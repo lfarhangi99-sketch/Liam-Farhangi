@@ -75,7 +75,7 @@
     const st = document.querySelector("[data-list='about.statements']");
     if (st && a.statements) st.innerHTML = a.statements.map((x) => `<div class="fcf"><div class="fcf-head">${esc(x.head)}</div><div class="fcf-body"><p class="fcf-text">${esc(x.text)}</p></div></div>`).join("");
     const tl = document.querySelector("[data-list='about.timeline']");
-    if (tl && a.timeline) tl.innerHTML = a.timeline.map((t) => `<div class="tl-item"><div class="tl-date">${esc(t.date)}</div><div class="tl-body"><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p><div class="tag-row">${(t.tags||[]).map((g)=>`<span class="tag">${esc(g)}</span>`).join("")}</div><div class="tl-links">${(t.links||[]).map((l)=>`<a href="${esc(l.h)}"${l.x?' target="_blank" rel="noopener"':''}>${esc(l.l)}</a>`).join("")}</div></div></div>`).join("");
+    if (tl && a.timeline) tl.innerHTML = a.timeline.map((t, i) => `<div class="tl-item acc${i === 0 ? " open" : ""}"><div class="tl-date">${esc(t.date)}</div><div class="tl-body"><button class="acc-head tl-head" aria-expanded="${i === 0}"><h3>${esc(t.title)}</h3><span class="chev">+</span></button><div class="acc-body"><div class="acc-inner"><p>${esc(t.text)}</p><div class="tag-row">${(t.tags||[]).map((g)=>`<span class="tag">${esc(g)}</span>`).join("")}</div><div class="tl-links">${(t.links||[]).map((l)=>`<a href="${esc(l.h)}"${l.x?' target="_blank" rel="noopener"':''}>${esc(l.l)}</a>`).join("")}</div></div></div></div></div>`).join("");
 
     const photoWrap = document.querySelector("[data-bind='about.photo']");
     if (photoWrap) {
@@ -141,10 +141,13 @@
 
     if (c.resumeFile) document.querySelectorAll("[data-resume]").forEach((r) => { r.href = "assets/" + c.resumeFile; });
   }
-  document.addEventListener("click", (e) => {
-    const h = e.target.closest(".acc-head"); if (!h) return;
-    const acc = h.parentNode, wasOpen = acc.classList.contains("open");
-    document.querySelectorAll(".acc.open").forEach((a) => { a.classList.remove("open"); a.querySelector(".acc-head").setAttribute("aria-expanded", "false"); });
-    if (!wasOpen) { acc.classList.add("open"); h.setAttribute("aria-expanded", "true"); }
-  });
+  const canHover = matchMedia("(hover: hover)").matches;
+  const setOpen = (a, on) => { a.classList.toggle("open", on); a.querySelector(".acc-head").setAttribute("aria-expanded", on); };
+  const groupOf = (a) => { if (!a.classList.contains("proj-card")) return [a]; const c = [...document.querySelectorAll(".proj-card")], i = c.indexOf(a); return [a, c[i % 2 ? i - 1 : i + 1]].filter(Boolean); };
+  const openAcc = (a) => { const keep = groupOf(a); document.querySelectorAll(".acc.open").forEach((x) => { if (!keep.includes(x)) setOpen(x, false); }); keep.forEach((x) => setOpen(x, true)); };
+  let timer;
+  document.addEventListener("mouseover", (e) => { if (!canHover) return; const a = e.target.closest(".acc"); if (!a || a.classList.contains("open")) return; clearTimeout(timer); timer = setTimeout(() => openAcc(a), 120); });
+  document.addEventListener("mouseout", (e) => { const a = e.target.closest(".acc"); if (a && !a.contains(e.relatedTarget)) clearTimeout(timer); });
+  document.addEventListener("focusin", (e) => { const a = e.target.closest(".acc"); if (a) openAcc(a); });
+  document.addEventListener("click", (e) => { if (canHover) return; const h = e.target.closest(".acc-head"); if (!h) return; const a = h.parentNode.closest(".acc"); if (a.classList.contains("open")) groupOf(a).forEach((x) => setOpen(x, false)); else openAcc(a); });
 })();
