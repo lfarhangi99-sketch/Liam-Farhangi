@@ -1,7 +1,11 @@
 {
   "theme": {
     "accent": "#E8223B",
-    "accentDim": "#A32638"
+    "accentDim": "#A32638",
+    "bg": "#050B1F",
+    "panel": "#0B1736",
+    "paper": "#F6F3EC",
+    "blue": "#12307A"
   },
   "pages": {
     "about": {
@@ -100,7 +104,7 @@
       {
         "date": "Next",
         "title": "Open to any opportunity",
-        "text": "Internships, co-ops, and full-time roles in aerospace, defense, and engineering, anywhere in the country.",
+        "text": "Open to all engineering opportunities, anywhere in the country.",
         "tags": [
           "Willing to relocate"
         ],
@@ -574,7 +578,9 @@
         "Bambu Studio",
         "FireControl",
         "DaVinci Resolve",
-        "Microsoft Excel, PowerPoint, Word"
+        "Excel",
+        "PowerPoint",
+        "Word"
       ]
     },
     {
@@ -587,7 +593,7 @@
     }
   ],
   "contact": {
-    "lede": "Open to any internship, co-op, or full-time role in aerospace, defense, or engineering, and willing to relocate anywhere. Whatever the job, I'll bring the work ethic. Reach out any time.",
+    "lede": "I'm open to all engineering opportunities and willing to relocate anywhere. Whatever the job, I'll bring the work ethic. Reach out any time.",
     "email": "Lfarhangi99@gmail.com",
     "phone": "845-418-7723",
     "phoneHref": "8454187723",

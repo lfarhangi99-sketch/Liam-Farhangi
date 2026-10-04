@@ -6,8 +6,7 @@
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  fetch("content.json?_=" + Date.now())
-    .then((r) => r.json())
+  (window.contentReady = fetch("content.json?_=" + Date.now()).then((r) => r.json()))
     .then((data) => {
       applyTheme(data.theme);
       applyPageStyle(data.pages);
@@ -19,11 +18,13 @@
     })
     .catch((e) => console.warn("content.json not loaded:", e));
 
-  function applyTheme(theme) {
-    if (!theme) return;
-    const root = document.documentElement.style;
-    if (theme.accent) root.setProperty("--accent", theme.accent);
-    if (theme.accentDim) root.setProperty("--accent-dim", theme.accentDim);
+  function hex2rgb(h) { h = h.replace("#", ""); if (h.length === 3) h = h.split("").map((c) => c + c).join(""); const n = parseInt(h, 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+  function applyTheme(t) {
+    if (!t) return;
+    const r = document.documentElement.style;
+    [["accent", "--accent"], ["accentDim", "--accent-dim"], ["bg", "--bg"], ["panel", "--panel"], ["paper", "--paper"], ["blue", "--blue"]].forEach(([k, v]) => { if (t[k]) r.setProperty(v, t[k]); });
+    [["accent", "--accent-rgb"], ["blue", "--blue-rgb"], ["paper", "--paper-rgb"], ["bg", "--bg-rgb"]].forEach(([k, v]) => { if (t[k]) r.setProperty(v, hex2rgb(t[k]).join(",")); });
+    if (t.accent) { const [R, G, B] = hex2rgb(t.accent); r.setProperty("--on-accent", 0.299 * R + 0.587 * G + 0.114 * B > 150 ? "#0a0a0a" : "#fff"); }
   }
 
   function applyPageStyle(pages) {
@@ -113,13 +114,14 @@
       </div>`).join("");
   }
 
+  function logo(t) { const r = (window.LOGO_RULES || []).find((x) => x[0].test(t)); return r ? `<span class="lg">${window.LOGOS[r[1]]}</span>` : ""; }
   function renderSkills(list) {
     const container = document.querySelector("[data-list='skills']");
     if (!container || !list) return;
     container.innerHTML = list.map((s) => `
       <div class="fcf">
-        <div class="fcf-head"><span class="sym">${esc(s.sym)}</span> ${esc(s.head)}</div>
-        <div class="fcf-body">${(s.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+        <div class="fcf-head">${esc(s.head)}</div>
+        <div class="fcf-body">${(s.tags || []).map((t) => `<span class="tag">${logo(t)}${esc(t)}</span>`).join("")}</div>
       </div>`).join("");
   }
 
@@ -141,13 +143,18 @@
 
     if (c.resumeFile) document.querySelectorAll("[data-resume]").forEach((r) => { r.href = "assets/" + c.resumeFile; });
   }
-  const canHover = matchMedia("(hover: hover)").matches;
-  const setOpen = (a, on) => { a.classList.toggle("open", on); a.querySelector(".acc-head").setAttribute("aria-expanded", on); };
-  const groupOf = (a) => { if (!a.classList.contains("proj-card")) return [a]; const c = [...document.querySelectorAll(".proj-card")], i = c.indexOf(a); return [a, c[i % 2 ? i - 1 : i + 1]].filter(Boolean); };
-  const openAcc = (a) => { const keep = groupOf(a); document.querySelectorAll(".acc.open").forEach((x) => { if (!keep.includes(x)) setOpen(x, false); }); keep.forEach((x) => setOpen(x, true)); };
-  let timer;
-  document.addEventListener("mouseover", (e) => { if (!canHover) return; const a = e.target.closest(".acc"); if (!a || a.classList.contains("open")) return; clearTimeout(timer); timer = setTimeout(() => openAcc(a), 120); });
-  document.addEventListener("mouseout", (e) => { const a = e.target.closest(".acc"); if (a && !a.contains(e.relatedTarget)) clearTimeout(timer); });
-  document.addEventListener("focusin", (e) => { const a = e.target.closest(".acc"); if (a) openAcc(a); });
-  document.addEventListener("click", (e) => { if (canHover) return; const h = e.target.closest(".acc-head"); if (!h) return; const a = h.parentNode.closest(".acc"); if (a.classList.contains("open")) groupOf(a).forEach((x) => setOpen(x, false)); else openAcc(a); });
+  const single = () => matchMedia("(max-width: 760px)").matches;
+  const setOpen = (a, on) => { if (a.classList.contains("open") !== on) { a.classList.toggle("open", on); a.querySelector(".acc-head").setAttribute("aria-expanded", on); } };
+  const groupOf = (a) => { if (!a.classList.contains("proj-card") || single()) return [a]; const c = [...document.querySelectorAll(".proj-card")], i = c.indexOf(a); return [a, c[i % 2 ? i - 1 : i + 1]].filter(Boolean); };
+  let ticking = false;
+  const sync = () => {
+    ticking = false;
+    const accs = [...document.querySelectorAll(".acc")]; if (!accs.length) return;
+    const y = innerHeight * 0.5; let best = null, bd = Infinity;
+    for (const a of accs) { const r = a.getBoundingClientRect(), d = y < r.top ? r.top - y : y > r.bottom ? y - r.bottom : 0; if (d === 0 && a.classList.contains("open")) return; if (d < bd) { bd = d; best = a; } }
+    const keep = groupOf(best); accs.forEach((x) => setOpen(x, keep.includes(x)));
+  };
+  const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(sync); } };
+  addEventListener("scroll", queue, { passive: true }); addEventListener("resize", queue);
+  new MutationObserver(queue).observe(document.body, { childList: true, subtree: true });
 })();
