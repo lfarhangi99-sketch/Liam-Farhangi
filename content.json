@@ -1,11 +1,11 @@
 {
   "theme": {
-    "accent": "#19d3c5",
-    "accentDim": "#0e9c91",
-    "bg": "#050505",
-    "panel": "#0c1111",
-    "paper": "#f2f7f6",
-    "blue": "#0b3b38"
+    "accent": "#e8223b",
+    "accentDim": "#a32638",
+    "bg": "#050b1f",
+    "panel": "#0b1736",
+    "paper": "#f6f3ec",
+    "blue": "#12307a"
   },
   "pages": {
     "about": {
