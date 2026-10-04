@@ -27,7 +27,7 @@
   },
   "about": {
     "eyebrow": "Mechanical Engineering — Stevens Institute of Technology",
-    "nameLine1": "LIAM O.",
+    "nameLine1": "LIAM",
     "nameLine2": "FARHANGI",
     "role": "Design Engineer / CAD / Aerospace",
     "photo": "",
@@ -98,44 +98,145 @@
     ],
     "timeline": [
       {
-        "date": "2020 — 2024",
-        "title": "Eagle Hill School, Massachusetts",
-        "text": "Where I found my footing in design and building. Squash captain, cross-country manager, film club president, student government, and a curriculum committee member. Hudson Valley roots, with stops in South Carolina and Massachusetts.",
+        "date": "Next",
+        "title": "Aerospace internships and beyond",
+        "text": "Looking to join a team at the top of its field, pushing the envelope forward.",
         "tags": [
-          "Leadership",
-          "Tutoring"
+          "Aerospace"
         ],
         "links": [
           {
-            "l": "Eagle Hill School ↗",
-            "h": "https://www.eaglehill.school/",
-            "x": 1
+            "l": "Get in touch →",
+            "h": "contact.html"
           }
         ]
       },
       {
-        "date": "Summer 2022",
-        "title": "Camp Counselor",
-        "text": "Supervised dorms, assisted in the classroom, and taught a science class where students built and launched model rockets.",
+        "date": "04/2026 — Present",
+        "title": "SAE BAJA: President",
+        "text": "Lead 40+ members and every subteam across 400+ parts, manage a $30,000 semesterly budget, and brought a $100,000 fiber laser cutter to campus for student organizations.",
         "tags": [
-          "Teaching",
-          "Communication"
-        ]
-      },
-      {
-        "date": "2023 — 2024",
-        "title": "Making things for fun",
-        "text": "Scuba certification, a leather-bound book with handmade paper, a laser-cut caffeine molecule, a forged rebar fire stand, and electroplating inspired by rocket-nozzle cooling.",
-        "tags": [
-          "Welding",
-          "Forging",
-          "Laser Cutting",
-          "Electroplating"
+          "Leadership",
+          "Budgeting",
+          "Fundraising"
         ],
         "links": [
           {
-            "l": "See projects →",
+            "l": "Projects →",
             "h": "projects.html"
+          },
+          {
+            "l": "Experience →",
+            "h": "experience.html"
+          }
+        ]
+      },
+      {
+        "date": "09/2025 — Present",
+        "title": "Head Teaching Assistant",
+        "text": "Promoted after one semester to lead lectures and labs on GD&T, CMM, metrology, welding, and cold forming.",
+        "tags": [
+          "GD&T",
+          "CAM",
+          "Teaching"
+        ],
+        "links": [
+          {
+            "l": "Experience →",
+            "h": "experience.html"
+          }
+        ]
+      },
+      {
+        "date": "06/2025 — 08/2025",
+        "title": "Undergraduate Researcher (Metamaterials)",
+        "text": "Researched vibrational dynamics in elastic materials, co-designed a roton structure, and calibrated a surface-mount machine.",
+        "tags": [
+          "Research",
+          "MATLAB"
+        ],
+        "links": [
+          {
+            "l": "Experience →",
+            "h": "experience.html"
+          }
+        ]
+      },
+      {
+        "date": "05/2025 — Present",
+        "title": "Machine Shop Assistant",
+        "text": "Machine parts for a hypersonic wind tunnel and wave tank, built a biomass 3D printer motion system, and repair the shop's printers, mills, lathes, and welders.",
+        "tags": [
+          "CNC Mills & Lathes",
+          "CMM",
+          "DFM"
+        ],
+        "links": [
+          {
+            "l": "Experience →",
+            "h": "experience.html"
+          },
+          {
+            "l": "Skills →",
+            "h": "skills.html"
+          }
+        ]
+      },
+      {
+        "date": "05/2025 — 05/2026",
+        "title": "SAE BAJA: Brakes/Pedals Lead",
+        "text": "Led design, research, manufacturing, and testing of 20+ parts for the braking system and pedals, with calculators to guide design choices.",
+        "tags": [
+          "SolidWorks",
+          "FEA",
+          "Machining"
+        ],
+        "links": [
+          {
+            "l": "Projects →",
+            "h": "projects.html"
+          },
+          {
+            "l": "Experience →",
+            "h": "experience.html"
+          }
+        ]
+      },
+      {
+        "date": "05/2025 — 04/2026",
+        "title": "SAE BAJA: Secretary of Recording",
+        "text": "Managed schedules, meeting agendas, inventory, and testing and competition logistics for 20+ members.",
+        "tags": [
+          "Organization",
+          "Logistics"
+        ],
+        "links": [
+          {
+            "l": "Projects →",
+            "h": "projects.html"
+          },
+          {
+            "l": "Experience →",
+            "h": "experience.html"
+          }
+        ]
+      },
+      {
+        "date": "01/2025 — 05/2025",
+        "title": "SAE BAJA: Drivetrain Guarding",
+        "text": "Researched, designed, manufactured, and welded aluminum drivetrain component guarding.",
+        "tags": [
+          "CAD",
+          "Aluminum Welding"
+        ],
+        "links": [
+          {
+            "l": "Projects →",
+            "h": "projects.html"
+          },
+          {
+            "l": "Experience →",
+            "h": "experience.html"
           }
         ]
       },
@@ -163,31 +264,12 @@
         ]
       },
       {
-        "date": "2025",
-        "title": "SAE BAJA: first builds",
-        "text": "Designed and welded drivetrain guarding, then led the braking system. Also built an automatic plant waterer and a phone-controlled door opener.",
+        "date": "Summer 2022",
+        "title": "Camp Counselor",
+        "text": "Supervised dorms, assisted in the classroom, and taught a science class where students built and launched model rockets.",
         "tags": [
-          "Arduino",
-          "3D Printing",
-          "FEA",
-          "CFD"
-        ],
-        "links": [
-          {
-            "l": "Projects →",
-            "h": "projects.html"
-          }
-        ]
-      },
-      {
-        "date": "Summer 2025",
-        "title": "Machine Shop and Metamaterials Research",
-        "text": "Joined the machine shop, machining parts for a hypersonic wind tunnel and a wave tank, and researched roton structures in a vibrations lab.",
-        "tags": [
-          "CNC Mills & Lathes",
-          "CMM",
-          "DFM",
-          "Research"
+          "Teaching",
+          "Communication"
         ],
         "links": [
           {
@@ -197,48 +279,18 @@
         ]
       },
       {
-        "date": "Fall 2025",
-        "title": "Head Teaching Assistant",
-        "text": "Promoted after one semester to lead lectures and labs on GD&T, CAM, metrology, and welding.",
-        "tags": [
-          "GD&T",
-          "CAM",
-          "Teaching"
-        ],
-        "links": [
-          {
-            "l": "Experience →",
-            "h": "experience.html"
-          }
-        ]
-      },
-      {
-        "date": "2026",
-        "title": "President of SAE BAJA",
-        "text": "Leading 40+ members and every subteam, and bringing a $100,000 fiber laser cutter to campus for student organizations.",
+        "date": "2020 — 2024",
+        "title": "Eagle Hill School, Massachusetts",
+        "text": "Where I found my footing in design and building. Squash captain, cross-country manager, film club president, student government, and a curriculum committee member.",
         "tags": [
           "Leadership",
-          "Budgeting",
-          "Fundraising"
+          "Tutoring"
         ],
         "links": [
           {
-            "l": "Projects →",
-            "h": "projects.html"
-          }
-        ]
-      },
-      {
-        "date": "Next",
-        "title": "Aerospace internships and beyond",
-        "text": "Looking to join a team at the top of its field, pushing the envelope forward.",
-        "tags": [
-          "Aerospace"
-        ],
-        "links": [
-          {
-            "l": "Get in touch →",
-            "h": "contact.html"
+            "l": "Eagle Hill School ↗",
+            "h": "https://www.eaglehill.school/",
+            "x": 1
           }
         ]
       }
@@ -272,9 +324,7 @@
       "Long-distance running",
       "Ultimate frisbee",
       "Squash",
-      "Scuba diving",
-      "Foraging",
-      "Hudson Valley, NY"
+      "Scuba diving"
     ]
   },
   "experience": [
@@ -303,6 +353,49 @@
       "group": "Work Experience"
     },
     {
+      "role": "President",
+      "org": "SAE BAJA Racing Team · Hoboken, NJ",
+      "dates": "04/2026 — Present",
+      "group": "Leadership: SAE BAJA Racing Team",
+      "bullets": [
+        "Collaborate with all subteams to design, analyze, and manufacture 400+ parts.",
+        "Present the club's objectives to 100+ students at least twice a semester.",
+        "Spearheaded the acquisition of a $100,000 fiber laser cutter: 5 months from proposal to delivery.",
+        "Create sponsorship packets and apply for grants, stipends, and subsidies for engineering organizations.",
+        "Managed a $30,000 semesterly budget for manufacturing and club operations."
+      ]
+    },
+    {
+      "role": "Brakes/Pedals Lead",
+      "org": "SAE BAJA Racing Team · Hoboken, NJ",
+      "dates": "05/2025 — 05/2026",
+      "group": "Leadership: SAE BAJA Racing Team",
+      "bullets": [
+        "Led the design, research, manufacturing, and testing of 20+ parts for the braking system and pedals.",
+        "Developed calculators for pedal length, line pressure, caliper size, and master cylinder size."
+      ]
+    },
+    {
+      "role": "Secretary of Recording",
+      "org": "SAE BAJA Racing Team · Hoboken, NJ",
+      "dates": "05/2025 — 04/2026",
+      "group": "Leadership: SAE BAJA Racing Team",
+      "bullets": [
+        "Managed schedules, meeting agendas, and testing and competition logistics for 20+ members.",
+        "Kept inventory of hardware and components and coordinated restocking.",
+        "Led weekly engineering research and progress meetings."
+      ]
+    },
+    {
+      "role": "Drivetrain Guarding",
+      "org": "SAE BAJA Racing Team · Hoboken, NJ",
+      "dates": "01/2025 — 05/2025",
+      "group": "Leadership: SAE BAJA Racing Team",
+      "bullets": [
+        "Researched, designed, manufactured, and welded aluminum drivetrain component guarding to SAE safety standards."
+      ]
+    },
+    {
       "role": "Undergraduate Researcher (Metamaterials)",
       "org": "Vibrations of Metamaterials · Stevens Institute of Technology",
       "dates": "06/2025 — 08/2025",
@@ -328,37 +421,55 @@
   ],
   "projects": [
     {
-      "title": "SAE BAJA Racing Team",
-      "role": "President · 04/2026 – Present",
+      "title": "SAE BAJA: President",
+      "role": "SAE BAJA Racing Team · 04/2026 – Present",
       "image": "",
       "paragraphs": [
         "Collaborate with all subteams to design, analyze, and manufacture 400+ parts.",
-        "Spearheaded the acquisition of a $100,000 fiber laser cutter: 5 months from initial proposal to machine delivery.",
+        "Spearheaded the acquisition of a $100,000 fiber laser cutter: 5 months from proposal to delivery.",
         "Managed a $30,000 semesterly budget, wrote sponsorship packets, and applied for grants and subsidies.",
-        "Present the club's objectives to 100+ students at least twice a semester.",
-        "Led the vehicle through three builds in three years; TIG-welded the roll cage so the tube bends before the weld breaks. Fabricated suspension parts and carbon fiber body panels, applying DFM, FEA, and CFD."
+        "Present the club's objectives to 100+ students at least twice a semester."
       ],
       "stack": "Leadership · Budgeting · Fundraising · Manufacturing"
     },
     {
-      "title": "Brakes & Pedals",
-      "role": "Brakes/Pedals Lead · 05/2025 – 05/2026",
+      "title": "SAE BAJA: Brakes/Pedals Lead",
+      "role": "SAE BAJA Racing Team · 05/2025 – 05/2026",
       "image": "",
       "paragraphs": [
         "Led design, research, manufacturing, and testing of 20+ parts for the braking system and pedals.",
-        "Developed calculators for pedal length, line pressure, caliper size, and master cylinder size.",
-        "Also served as Secretary of Recording, managing schedules and logistics for 20+ members."
+        "Developed calculators for pedal length, line pressure, caliper size, and master cylinder size."
       ],
       "stack": "SolidWorks · FEA · Machining · Testing"
     },
     {
-      "title": "Drivetrain Guarding",
-      "role": "BAJA Team · 01/2025 – 05/2025",
+      "title": "SAE BAJA: Secretary of Recording",
+      "role": "SAE BAJA Racing Team · 05/2025 – 04/2026",
       "image": "",
       "paragraphs": [
-        "Researched, designed, manufactured, and welded aluminum drivetrain component guarding."
+        "Managed schedules, meeting agendas, and testing and competition logistics for 20+ members.",
+        "Kept hardware inventory, coordinated restocking, and led weekly research and progress meetings."
+      ],
+      "stack": "Organization · Logistics · Inventory"
+    },
+    {
+      "title": "SAE BAJA: Drivetrain Guarding",
+      "role": "SAE BAJA Racing Team · 01/2025 – 05/2025",
+      "image": "",
+      "paragraphs": [
+        "Researched, designed, manufactured, and welded aluminum drivetrain component guarding to SAE safety standards."
       ],
       "stack": "CAD · Aluminum Welding · Fabrication"
+    },
+    {
+      "title": "SAE BAJA: Fabrication & Training",
+      "role": "SAE BAJA Racing Team · 2024 – Present",
+      "image": "",
+      "paragraphs": [
+        "TIG-welded the roll cage so the tube bends before the weld breaks. Fabricated suspension parts and carbon fiber body panels.",
+        "Train new members in welding, plasma cutting, milling, turning, tube bending, and 3D printing; apply DFM, FEA, and CFD."
+      ],
+      "stack": "TIG Welding · Carbon Fiber · Training · DFM"
     },
     {
       "title": "Autonomous Boat Design",
@@ -398,16 +509,6 @@
         "Nickel- and copper-plated coins, a metal mug, and older welded projects, learning to substitute materials and teach myself without a classroom."
       ],
       "stack": "Nickel Plating · Copper Plating · Research"
-    },
-    {
-      "title": "Handmade Builds",
-      "role": "High School · 2023 – 2024",
-      "image": "",
-      "paragraphs": [
-        "A leather-bound book with recycled-newspaper paper, laser-cut wood covers, embossing, and marbled endpapers. A laser-cut caffeine molecule model.",
-        "A forged and welded rebar fire stand, using a custom jig so every bend was repeatable."
-      ],
-      "stack": "Leatherwork · Laser Cutting · Welding · Forging"
     }
   ],
   "skills": [
