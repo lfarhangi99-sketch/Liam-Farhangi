@@ -1,12 +1,12 @@
 {
   "theme": {
-    "accent": "#E8223B",
-    "accentDim": "#A32638"
+    "accent": "#e8223b",
+    "accentDim": "#a32638"
   },
   "pages": {
     "about": {
-      "background": "",
-      "align": "left"
+      "background": "1791138088699_wp11976345.jpg",
+      "align": "center"
     },
     "experience": {
       "background": "",
