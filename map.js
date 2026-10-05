@@ -2,17 +2,11 @@ var US_STATES=[{"n":"Alabama","d":"M648,492.4L651.8,491.5L651.9,491L652.9,491.8L
 (function(){
 var root=document.getElementById('usmap-app');if(!root)return;
 var W=975,H=610,vb=[0,0,W,H],drag=null,sel=-1;
-root.innerHTML='<div class="map-bar"><span class="home-pill"><i></i>Home base: '+US_HOME.n+'</span><span class="map-trip">Click a pin to see the route and travel time from '+US_HOME.n+'</span></div>'+
-'<div class="map-stage"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Map of aerospace and defense locations in the United States"><g class="states">'+US_STATES.map(function(s){return '<path d="'+s.d+'"><title>'+s.n+'</title></path>';}).join('')+'</g><path class="arc" pathLength="1"/><g class="pins">'+US_PINS.map(function(p,i){return '<g class="pin" tabindex="0" data-i="'+i+'" style="--d:'+(i%8*.3)+'s" transform="translate('+p.x+','+p.y+')"><circle class="ring" r="5"/><circle class="dot" r="5"/></g>';}).join('')+'<g class="home" transform="translate('+US_HOME.x+','+US_HOME.y+')"><circle class="hring" r="9"/><circle class="hdot" r="6"/></g></g></svg>'+
+root.innerHTML='<div class="map-bar"><span class="home-pill"><i></i>Home base: '+US_HOME.n+'</span></div>'+
+'<div class="map-stage"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Map of aerospace and defense locations in the United States"><g class="states">'+US_STATES.map(function(s){return '<path d="'+s.d+'"><title>'+s.n+'</title></path>';}).join('')+'</g><g class="pins">'+US_PINS.map(function(p,i){return '<g class="pin" tabindex="0" data-i="'+i+'" style="--d:'+(i%8*.3)+'s" transform="translate('+p.x+','+p.y+')"><circle class="ring" r="5"/><circle class="dot" r="5"/></g>';}).join('')+'<g class="home" transform="translate('+US_HOME.x+','+US_HOME.y+')"><circle class="hring" r="9"/><circle class="hdot" r="6"/></g></g></svg>'+
 '<div class="map-tip"></div><div class="map-zoom"><button data-z="1" aria-label="Zoom in">+</button><button data-z="-1" aria-label="Zoom out">−</button><button data-z="0" aria-label="Reset">⟲</button></div></div>';
-var svg=root.querySelector('svg'),tip=root.querySelector('.map-tip'),stage=root.querySelector('.map-stage'),arc=root.querySelector('.arc'),trip=root.querySelector('.map-trip');
-function dist(a,b){var R=3958.8,r=Math.PI/180,dl=(b.la-a.la)*r,dn=(b.lo-a.lo)*r,x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a.la*r)*Math.cos(b.la*r)*Math.sin(dn/2)*Math.sin(dn/2);return 2*R*Math.asin(Math.sqrt(x));}
-function hm(h){var m=Math.round(h*60);return Math.floor(m/60)+'h '+('0'+m%60).slice(-2)+'m';}
-function select(i){sel=i;var p=US_PINS[i],d=dist(US_HOME,p);root.querySelectorAll('.pin').forEach(function(g,k){g.classList.toggle('sel',k===i);});
-var drive=d*1.2/58,fly=d/500+1.6;
-trip.innerHTML='<b>'+US_HOME.n+' → '+p.n+'</b><span>'+Math.round(d).toLocaleString()+' mi · Drive about '+hm(drive)+(d>180?' · Fly about '+hm(fly)+' door to door':'')+'</span>';
-var mx=(US_HOME.x+p.x)/2,my=(US_HOME.y+p.y)/2-Math.hypot(p.x-US_HOME.x,p.y-US_HOME.y)*.16;
-arc.setAttribute('d','M'+US_HOME.x+','+US_HOME.y+' Q'+mx+','+my+' '+p.x+','+p.y);arc.classList.remove('go');void arc.getBoundingClientRect();arc.classList.add('go');}
+var svg=root.querySelector('svg'),tip=root.querySelector('.map-tip'),stage=root.querySelector('.map-stage');
+function select(i){sel=i;root.querySelectorAll('.pin').forEach(function(g,k){g.classList.toggle('sel',k===i);});}
 function setVB(){svg.setAttribute('viewBox',vb.join(' '));stage.classList.toggle('zoomed',vb[2]<W-1);}
 function zoom(f){var cx=vb[0]+vb[2]/2,cy=vb[1]+vb[3]/2,w=Math.min(W,Math.max(W/5,vb[2]/f)),h=w*H/W;vb=[Math.min(W-w,Math.max(0,cx-w/2)),Math.min(H-h,Math.max(0,cy-h/2)),w,h];setVB();}
 root.addEventListener('click',function(e){var z=e.target.closest('[data-z]');if(z){+z.dataset.z?zoom(+z.dataset.z>0?1.6:1/1.6):(vb=[0,0,W,H],setVB());return;}var p=e.target.closest('.pin');if(p)select(+p.dataset.i);});

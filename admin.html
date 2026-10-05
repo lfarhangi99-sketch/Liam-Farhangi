@@ -56,7 +56,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="nav-mark"><b>L.O.F</b> // SITE EDITOR</div>
+    <div class="nav-mark"><b>Liam Farhangi</b> // SITE EDITOR</div>
     <ul class="nav-links"><li><a href="index.html">← Back to site</a></li></ul>
   </div>
 </nav>
@@ -109,6 +109,7 @@
       <label>Photo (upload, optional)</label>
       <input type="file" id="about_photo_file" accept="image/*">
       <img id="about_photo_thumb" class="thumb" style="display:none;">
+      <button class="add-btn" id="about_photo_rm" type="button" style="display:none;">Remove photo</button>
       <label>Paragraph 1</label><textarea id="about_bodyP1"></textarea>
       <label>Paragraph 2</label><textarea id="about_bodyP2"></textarea>
       <div class="row2">
@@ -167,6 +168,7 @@
       <label>Resume PDF (upload, optional)</label>
       <input type="file" id="resume_file" accept="application/pdf">
       <small class="hint" id="resume_current"></small>
+      <button class="add-btn" id="resume_rm" type="button" style="display:none;">Remove uploaded resume (use the default one)</button>
     </div>
   </div>
 
@@ -175,6 +177,7 @@
 
 <div class="publish-bar">
   <span class="status" id="status"></span>
+  <button class="add-btn" id="backupBtn" style="display:none;">Download backup</button>
   <button class="add-btn" id="publishBtn" style="display:none;">Publish changes</button>
 </div>
 
@@ -203,10 +206,11 @@ $("loadBtn").addEventListener("click", async () => {
     const json = await res.json();
     sha = json.sha;
     content = JSON.parse(decodeURIComponent(escape(atob(json.content))));
+    maybeRestoreDraft();
     fillForm();
     $("setup").style.display = "none";
     $("editor").style.display = "block";
-    $("publishBtn").style.display = "inline-block";
+    $("publishBtn").style.display = "inline-block"; $("backupBtn").style.display = "inline-block";
     statusEl.textContent = "Loaded. Edit below, then Publish.";
   } catch (e) {
     statusEl.textContent = "Error: " + e.message;
@@ -259,7 +263,8 @@ function fillForm() {
   $("about_school").value = a.school;
   $("about_degree").value = a.degree;
   $("about_gpa").value = a.gpa;
-  if (a.photo) { $("about_photo_thumb").src = "assets/" + a.photo; $("about_photo_thumb").style.display = "block"; }
+  if (a.photo) { $("about_photo_thumb").src = "assets/" + a.photo; $("about_photo_thumb").style.display = "block"; $("about_photo_rm").style.display = "inline-block"; } else { $("about_photo_thumb").style.display = "none"; $("about_photo_rm").style.display = "none"; }
+  $("resume_rm").style.display = content.contact.resumeFile ? "inline-block" : "none";
   renderTags();
 
   renderPagesList();
@@ -311,7 +316,7 @@ function renderPagesList() {
       <h4>${PAGE_LABELS[key] || key}</h4>
       <label>Background photo (upload, optional)</label>
       <input type="file" accept="image/*" data-bgfile>
-      ${cfg.background ? `<img src="assets/${escAttr(cfg.background)}" class="thumb">` : `<small class="hint">No background set — uses default black grid.</small>`}
+      ${cfg.background ? `<img src="assets/${escAttr(cfg.background)}" class="thumb"><button class="add-btn" type="button" data-rmbg>Remove background</button>` : `<small class="hint">No background set — uses default black grid.</small>`}
       <label>Text placement</label>
       <select data-align>
         <option value="left"${cfg.align === "left" ? " selected" : ""}>Left (default)</option>
@@ -324,6 +329,7 @@ function renderPagesList() {
         renderPagesList();
       }
     });
+    const rb = row.querySelector("[data-rmbg]"); if (rb) rb.addEventListener("click", () => { removeAsset(cfg.background); cfg.background = ""; renderPagesList(); });
     row.querySelector("[data-align]").addEventListener("change", (e) => { cfg.align = e.target.value; });
     wrap.appendChild(row);
   });
@@ -370,7 +376,7 @@ function renderProjectsList() {
       <label>Role / dates</label><input type="text" data-f="role" value="${escAttr(p.role)}">
       <label>Image (upload, optional)</label>
       <input type="file" accept="image/*" data-imgfile>
-      ${p.image ? `<img src="assets/${escAttr(p.image)}" class="thumb">` : ""}
+      ${p.image ? `<img src="assets/${escAttr(p.image)}" class="thumb"><button class="add-btn" type="button" data-rmimg>Remove image</button>` : ""}
       <label>Paragraphs (one per line)</label>
       <textarea data-f="paragraphs" style="min-height:100px;">${escHtml(p.paragraphs.join("\n"))}</textarea>
       <label>Stack / footer line</label><input type="text" data-f="stack" value="${escAttr(p.stack || "")}">`;
@@ -380,6 +386,7 @@ function renderProjectsList() {
       if (f === "paragraphs") p.paragraphs = el.value.split("\n").map(s => s.trim()).filter(Boolean);
       else p[f] = el.value;
     }));
+    const rm = div.querySelector("[data-rmimg]"); if (rm) rm.addEventListener("click", () => { removeAsset(p.image); p.image = ""; renderProjectsList(); });
     const imgInput = div.querySelector("[data-imgfile]");
     imgInput.addEventListener("change", async () => {
       if (imgInput.files[0]) {
@@ -422,6 +429,8 @@ $("add_skill").onclick = () => { content.skills.push({ sym: "◇", head: "New Gr
 
 // pending binary uploads (images/resume) queued until Publish
 let pendingFiles = []; // {path, base64}
+let pendingDeletes = [];
+function removeAsset(name) { if (!name) return; const q = pendingFiles.some((f) => f.path === "assets/" + name); pendingFiles = pendingFiles.filter((f) => f.path !== "assets/" + name); if (!q) pendingDeletes.push("assets/" + name); statusEl.textContent = "Removed. Click Publish to save."; }
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const r = new FileReader();
@@ -430,9 +439,16 @@ function fileToBase64(file) {
     r.readAsDataURL(file);
   });
 }
+async function compressImage(file) {
+  const bmp = await createImageBitmap(file), k = Math.min(1, 1920 / Math.max(bmp.width, bmp.height));
+  const cv = document.createElement("canvas"); cv.width = Math.round(bmp.width * k); cv.height = Math.round(bmp.height * k);
+  cv.getContext("2d").drawImage(bmp, 0, 0, cv.width, cv.height);
+  return cv.toDataURL("image/jpeg", 0.82).split(",")[1];
+}
 async function queueImageUpload(file) {
-  const safe = Date.now() + "_" + file.name.replace(/[^a-zA-Z0-9.\-_]/g, "");
-  const base64 = await fileToBase64(file);
+  const isPhoto = file.type.startsWith("image/") && !/svg|gif/.test(file.type);
+  const safe = Date.now() + "_" + (isPhoto ? file.name.replace(/\.[^.]+$/, "").replace(/[^a-zA-Z0-9\-_]/g, "") + ".jpg" : file.name.replace(/[^a-zA-Z0-9.\-_]/g, ""));
+  const base64 = isPhoto ? await compressImage(file) : await fileToBase64(file);
   pendingFiles.push({ path: "assets/" + safe, base64 });
   statusEl.textContent = "Image queued: " + safe + " (will upload on Publish)";
   return safe;
@@ -442,7 +458,7 @@ $("about_photo_file").addEventListener("change", async (e) => {
     const filename = await queueImageUpload(e.target.files[0]);
     content.about.photo = filename;
     $("about_photo_thumb").src = URL.createObjectURL(e.target.files[0]);
-    $("about_photo_thumb").style.display = "block";
+    $("about_photo_thumb").style.display = "block"; $("about_photo_rm").style.display = "inline-block";
   }
 });
 $("resume_file").addEventListener("change", async (e) => {
@@ -483,6 +499,9 @@ function enableDragReorder(container, arr, rerender) {
   });
 }
 
+$("about_photo_rm").addEventListener("click", () => { removeAsset(content.about.photo); content.about.photo = ""; $("about_photo_file").value = ""; $("about_photo_thumb").style.display = "none"; $("about_photo_rm").style.display = "none"; });
+$("resume_rm").addEventListener("click", () => { removeAsset(content.contact.resumeFile); content.contact.resumeFile = ""; $("resume_file").value = ""; $("resume_current").textContent = "Using the default resume."; $("resume_rm").style.display = "none"; });
+async function deleteFile(path) { const c = creds(); const r = await fetch(apiBase() + path + "?ref=" + c.branch, { headers: authHeaders() }); if (!r.ok) return; const j = await r.json(); await fetch(apiBase() + path, { method: "DELETE", headers: { ...authHeaders(), "Content-Type": "application/json" }, body: JSON.stringify({ message: "Remove " + path, sha: j.sha, branch: c.branch }) }); }
 function escAttr(s) { return String(s == null ? "" : s).replace(/"/g, "&quot;"); }
 function escHtml(s) { return String(s == null ? "" : s).replace(/</g, "&lt;"); }
 
@@ -520,12 +539,15 @@ $("publishBtn").addEventListener("click", async () => {
       await putFile(f.path, f.base64, "Add/update " + f.path);
     }
     pendingFiles = [];
+    for (const p of pendingDeletes) { try { await deleteFile(p); } catch (e) {} }
+    pendingDeletes = [];
     // 2. update content.json
     const jsonStr = JSON.stringify(content, null, 2);
     const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
     const res = await putFile("content.json", b64, "Update site content", sha);
     sha = res.content.sha;
-    statusEl.textContent = "Published! Refresh the live site in ~30 seconds.";
+    localStorage.removeItem("lof_draft");
+    statusEl.textContent = "Published! Saved to your site. Refresh the live site in ~30 seconds.";
   } catch (e) {
     statusEl.textContent = "Error: " + e.message;
   }
@@ -545,6 +567,17 @@ async function putFile(path, base64Content, message, existingSha) {
   if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error("Failed to save " + path + ": " + (err.message || res.status)); }
   return res.json();
 }
+function maybeRestoreDraft() {
+  try { const dr = JSON.parse(localStorage.getItem("lof_draft") || "null");
+    if (dr && JSON.stringify(dr.content) !== JSON.stringify(content) && confirm("You have unpublished edits saved in this browser (" + new Date(dr.t).toLocaleString() + "). Restore them?")) content = dr.content; } catch (e) {}
+}
+let draftTimer;
+document.addEventListener("input", () => {
+  if (!content || $("editor").style.display === "none") return;
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(() => { try { collectForm(); localStorage.setItem("lof_draft", JSON.stringify({ t: Date.now(), content })); statusEl.textContent = "Draft saved in this browser (not published yet)"; } catch (e) {} }, 700);
+});
+$("backupBtn").addEventListener("click", () => { collectForm(); const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(content, null, 2)], { type: "application/json" })); a.download = "content-backup-" + new Date().toISOString().slice(0, 10) + ".json"; a.click(); });
 if(localStorage.getItem('lof_token')){$('loadBtn').click();}
 </script>
 </body>

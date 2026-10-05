@@ -135,7 +135,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 
 /* chevron drawn with CSS so the + and x stay perfectly centered */
 .chev{font-size:0;position:relative}.chev::before,.chev::after{content:'';position:absolute;left:50%;top:50%;width:14px;height:2px;background:currentColor;border-radius:2px;transform:translate(-50%,-50%)}.chev::after{transform:translate(-50%,-50%) rotate(90deg)}
-.acc-head{cursor:default;pointer-events:none}
+.acc-head{cursor:pointer}
 /* projects: pairs in a row share the same height */
 .proj-grid{align-items:stretch}.proj-card.acc{display:flex;flex-direction:column}
 /* skills logos */
@@ -151,3 +151,21 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 nav .nav-links{position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:4px;padding:14px 20px 22px;background:rgba(var(--bg-rgb),.97);border-bottom:1px solid var(--line);opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .3s,transform .3s var(--ease)}
 nav.nav-open .nav-links{opacity:1;transform:none;pointer-events:auto}nav .nav-links a{display:block;font-size:13px;padding:14px 16px}.admin-btn{margin-left:0}}
 .proj-card.acc .acc-head{min-height:118px}
+
+/* more room between tabs so a small scroll never skips one */
+.xp-item.acc .acc-head{padding:46px 14px}.proj-grid{gap:40px 24px}.proj-card.acc .acc-head{padding:40px 28px;min-height:150px}
+.acc-head:hover .chev{border-color:var(--accent)}
+
+/* horizontal timeline */
+.htl{display:flex;overflow-x:auto;scroll-snap-type:x proximity;padding:6px 0 22px;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
+.htl-item{position:relative;flex:0 0 330px;padding:36px 34px 0 0;scroll-snap-align:start}
+.htl-item::before{content:'';position:absolute;top:11px;left:0;right:0;height:2px;background:var(--line-strong)}
+.htl-dot{position:absolute;top:2px;left:0;width:20px;height:20px;border-radius:50%;background:var(--gloss);box-shadow:0 0 0 5px rgba(var(--accent-rgb),.18);z-index:1}
+.htl-item h3{font-family:var(--font-display);font-weight:800;font-size:20px;margin:4px 0 8px}.htl-item p{color:var(--paper-dim);font-size:14px;margin-bottom:12px}.htl-item .tl-date{padding-top:0}
+.htl-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}.htl-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-strong);background:none;color:var(--paper);font-size:24px;line-height:1;cursor:pointer;transition:border-color .2s}.htl-btn:hover{border-color:var(--accent);color:var(--accent)}
+/* no hover pop / glow on tabs and cards */
+.proj-card:hover,.fcf:hover{transform:none;border-color:var(--line-strong);box-shadow:none}.proj-card:hover .proj-img{transform:none}
+.xp-item.acc:hover{background:none}.tb-cell:hover,.contact-cell:hover{background:none}
+.tag:hover{transform:none;border-color:var(--line-strong);color:var(--paper-dim)}.fcf-body .tag:hover,.proj-card .chips .tag:hover{color:var(--paper)}
+.acc-head:hover .chev{border-color:var(--line-strong)}
+.lg img{width:15px;height:15px;object-fit:contain;display:block}
