@@ -50,6 +50,7 @@
   .pal{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--line-strong);border-radius:14px;padding:12px;display:grid;gap:10px;transition:border-color .2s,transform .2s}
   .pal:hover{transform:translateY(-3px);border-color:var(--accent)}.pal.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
   .pal .sw{display:flex;height:34px;border-radius:8px;overflow:hidden}.pal .sw i{flex:1}.pal b{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;font-weight:500;color:var(--paper)}
+  .gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:12px}.gal-item{position:relative}.gal-item img{width:100%;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--line-strong)}
 </style>
 </head>
 <body>
@@ -96,6 +97,13 @@
       <h3>Page Backgrounds & Layout</h3>
       <span class="drag-hint">Set a different background photo and text placement for each tab</span>
       <div id="pages_list"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Photo Strip (home page)</h3>
+      <span class="drag-hint">Photos slide across the top of the home page. Add as many as you like; remove any with the x.</span>
+      <input type="file" id="gallery_file" accept="image/*" multiple>
+      <div id="gallery_list" class="gal-grid"></div>
     </div>
 
     <div class="panel">
@@ -268,6 +276,7 @@ function fillForm() {
   renderTags();
 
   renderPagesList();
+  renderGallery();
   renderExperienceList();
   renderProjectsList();
   renderSkillsList();
@@ -502,6 +511,8 @@ function enableDragReorder(container, arr, rerender) {
 $("about_photo_rm").addEventListener("click", () => { removeAsset(content.about.photo); content.about.photo = ""; $("about_photo_file").value = ""; $("about_photo_thumb").style.display = "none"; $("about_photo_rm").style.display = "none"; });
 $("resume_rm").addEventListener("click", () => { removeAsset(content.contact.resumeFile); content.contact.resumeFile = ""; $("resume_file").value = ""; $("resume_current").textContent = "Using the default resume."; $("resume_rm").style.display = "none"; });
 async function deleteFile(path) { const c = creds(); const r = await fetch(apiBase() + path + "?ref=" + c.branch, { headers: authHeaders() }); if (!r.ok) return; const j = await r.json(); await fetch(apiBase() + path, { method: "DELETE", headers: { ...authHeaders(), "Content-Type": "application/json" }, body: JSON.stringify({ message: "Remove " + path, sha: j.sha, branch: c.branch }) }); }
+function renderGallery() { const w = $("gallery_list"); w.innerHTML = ""; (content.about.gallery = content.about.gallery || []).forEach((f, i) => { const dv = document.createElement("div"); dv.className = "gal-item"; dv.innerHTML = `<img src="assets/${escAttr(f)}" alt=""><button class="list-del" type="button">✕</button>`; dv.querySelector("button").onclick = () => { removeAsset(f); content.about.gallery.splice(i, 1); renderGallery(); }; w.appendChild(dv); }); }
+$("gallery_file").addEventListener("change", async (e) => { for (const f of e.target.files) { const n = await queueImageUpload(f); (content.about.gallery = content.about.gallery || []).push(n); } e.target.value = ""; renderGallery(); });
 function escAttr(s) { return String(s == null ? "" : s).replace(/"/g, "&quot;"); }
 function escHtml(s) { return String(s == null ? "" : s).replace(/</g, "&lt;"); }
 

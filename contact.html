@@ -31,40 +31,27 @@
     <h2 class="head">Let's talk about the next project</h2>
     <p class="lede" data-bind="contact.lede"></p>
 
-    <div class="contact-block">
-      <div class="contact-cell">
-        <span class="k">Email</span>
-        <a class="v" data-bind="contact.email" data-href="contact.email" href="#"></a>
+    <section class="blk">
+      <div class="sheet-label"><span class="num">GET IN TOUCH</span><span class="rule"></span></div>
+      <div class="contact-block">
+        <div class="contact-cell"><span class="k">Email</span><a class="v" data-bind="contact.email" data-href="contact.email" href="#"></a></div>
+        <div class="contact-cell"><span class="k">Phone</span><a class="v" data-bind="contact.phone" data-href="contact.phone" href="#"></a></div>
+        <div class="contact-cell"><span class="k">LinkedIn</span><a class="v" data-bind="contact.linkedinLabel" data-href="contact.linkedin" href="#" target="_blank" rel="noopener"></a></div>
+        <div class="contact-cell"><span class="k">Location</span><span class="v" data-bind="contact.location"></span></div>
       </div>
-      <div class="contact-cell">
-        <span class="k">Phone</span>
-        <a class="v" data-bind="contact.phone" data-href="contact.phone" href="#"></a>
-      </div>
-      <div class="contact-cell">
-        <span class="k">LinkedIn</span>
-        <a class="v" data-bind="contact.linkedinLabel" data-href="contact.linkedin" href="#" target="_blank" rel="noopener"></a>
-      </div>
-      <div class="contact-cell">
-        <span class="k">Location</span>
-        <span class="v" data-bind="contact.location"></span>
-      </div>
-    </div>
+      <div class="hero-cta" style="margin-top:24px;"><a class="btn primary" data-resume href="Liam_Farhangi_Resume.pdf" download>Download Resume</a></div>
+    </section>
 
-    <div class="hero-cta" style="margin-top:24px;">
-      <a class="btn primary" data-resume href="Liam_Farhangi_Resume.pdf" download>Download Resume</a>
-    </div>
-
-    <div style="height:90px;"></div>
-    <div class="sheet-label" id="map"><span class="num">RELOCATION</span> WHERE I'LL GO <span class="rule"></span></div>
-    <h2 class="head">Ready to move for the right work</h2>
-    <p class="lede">I would be willing to move to these places, and to others that are not marked.</p>
-    <div id="usmap-app"></div>
+    <section class="blk">
+      <div class="sheet-label"><span class="num">RELOCATION</span><span class="rule"></span></div>
+      <h2 class="head">Willing to relocate</h2>
+      <p class="lede" style="margin-bottom:0">I am willing to relocate anywhere in the USA for the right engineering opportunity.</p>
+    </section>
   </div>
 </main>
 
 <footer>LIAM O. FARHANGI &mdash; MECHANICAL ENGINEERING &mdash; REV. 2026</footer>
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 <script src="fx.js" defer></script>
-<script src="map.js" defer></script>
 </body>
 </html>

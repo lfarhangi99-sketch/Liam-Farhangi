@@ -1,11 +1,11 @@
 {
   "theme": {
-    "accent": "#ffffff",
-    "accentDim": "#bdbdbd",
-    "bg": "#000000",
-    "panel": "#0d0d0d",
-    "paper": "#f5f5f5",
-    "blue": "#3a3a3a"
+    "accent": "#E8223B",
+    "accentDim": "#A32638",
+    "bg": "#050B1F",
+    "panel": "#0B1736",
+    "paper": "#F6F3EC",
+    "blue": "#12307A"
   },
   "pages": {
     "about": {
@@ -72,7 +72,7 @@
         "v": "Dean's List"
       }
     ],
-    "bodyP1": "I'm a mechanical engineering student at Stevens Institute of Technology, and most of what I know about design I learned by making the part first and drawing it second. I spend my week split between the machine shop and the CAD workstation — running mills and lathes on one side, modeling and tolerancing on the other — which is exactly the loop I want to keep running in aerospace: design something, understand how it's actually manufactured, and make it better because of that.",
+    "bodyP1": "I'm a mechanical engineering student at Stevens Institute of Technology. I constantly seek out the most difficult challenges in any environment, and I always try to uplift those around me to leave things better than I found them. I constantly seek novel experiences and new ways to explain the world. One of the biggest motivators in my life is to ensure that no one feels forgotten and to do what I can, when I can, to help others.",
     "school": "Stevens Institute of Technology, Hoboken NJ",
     "degree": "B.E., Mechanical Engineering — Expected 05/2028",
     "gpa": "3.582 / 4.00",
@@ -134,15 +134,11 @@
       {
         "date": "Next",
         "title": "Open to any opportunity",
-        "text": "Open to all engineering opportunities, anywhere in the country.",
+        "text": "Open to all engineering opportunities, and willing to relocate anywhere in the USA.",
         "tags": [
           "Willing to relocate"
         ],
         "links": [
-          {
-            "l": "See the map →",
-            "h": "contact.html#map"
-          },
           {
             "l": "Get in touch →",
             "h": "contact.html"
@@ -329,7 +325,7 @@
         ]
       }
     ],
-    "bodyP2": "undefined"
+    "gallery": []
   },
   "experience": [
     {
@@ -600,7 +596,7 @@
     }
   ],
   "contact": {
-    "lede": "I'm open to all engineering opportunities and willing to relocate anywhere. Whatever the job, I'll bring the work ethic. Reach out any time.",
+    "lede": "I'm open to all engineering opportunities and willing to relocate anywhere in the USA. Whatever the job, I'll bring the work ethic. Reach out any time.",
     "email": "Lfarhangi99@gmail.com",
     "phone": "845-418-7723",
     "phoneHref": "8454187723",

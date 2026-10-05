@@ -34,11 +34,12 @@
     if (!cfg) return;
     const main = document.querySelector("main");
     if (!main) return;
-    if (cfg.background) {
-      main.style.backgroundImage =
-        "linear-gradient(rgba(10,10,10,0.86), rgba(10,10,10,0.86)), url('assets/" + cfg.background + "')";
-      main.style.backgroundSize = "cover";
-      main.style.backgroundPosition = "center";
+    const imgs = cfg.backgrounds && cfg.backgrounds.length ? cfg.backgrounds : cfg.background ? [cfg.background] : [];
+    if (imgs.length) {
+      const show = document.createElement("div"); show.className = "bg-show";
+      show.innerHTML = imgs.map((f, i) => `<img src="assets/${esc(f)}" alt=""${i ? ' loading="lazy"' : ""} class="${i ? "" : "on"}">`).join("");
+      document.body.appendChild(show);
+      if (imgs.length > 1) { let k = 0; const el = show.querySelectorAll("img"); setInterval(() => { if (document.hidden) return; el[k].classList.remove("on"); k = (k + 1) % el.length; el[k].classList.add("on"); }, 7000); }
     }
     if (cfg.align === "center") {
       main.classList.add("align-center");
@@ -77,6 +78,8 @@
     if (tl && a.timeline) tl.innerHTML = a.timeline.map((t) => `<div class="htl-item"><span class="htl-dot"></span><div class="tl-date">${esc(t.date)}</div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p><div class="tag-row">${(t.tags||[]).map((g)=>`<span class="tag">${esc(g)}</span>`).join("")}</div><div class="tl-links">${(t.links||[]).map((l)=>`<a href="${esc(l.h)}"${l.x?' target="_blank" rel="noopener"':''}>${esc(l.l)}</a>`).join("")}</div></div>`).join("");
     const st = document.querySelector("[data-list='about.statements']");
     if (st && a.statements) st.innerHTML = a.statements.map((x) => `<div class="fcf"><div class="fcf-head">${esc(x.head)}</div><div class="fcf-body"><p class="fcf-text">${esc(x.text)}</p></div></div>`).join("");
+    const gl = document.querySelector("[data-list='about.gallery']");
+    if (gl) { if (a.gallery && a.gallery.length) { const h = a.gallery.map((f) => `<img src="assets/${esc(f)}" alt="" loading="lazy">`).join(""); gl.innerHTML = `<div class="gallery-track">${h}${h}</div>`; gl.hidden = false; } else gl.hidden = true; }
     const photoWrap = document.querySelector("[data-bind='about.photo']");
     if (photoWrap) {
       if (a.photo) { photoWrap.innerHTML = `<img src="assets/${esc(a.photo)}" alt="Photo of Liam Farhangi" class="about-photo">`; }
@@ -91,12 +94,13 @@
   function renderExperience(list, target) {
     const container = target || document.querySelector("[data-list='experience']");
     if (!container || !list) return;
-    let prev = null;
-    container.innerHTML = list.map((xp, i) => { const hd = xp.group && xp.group !== prev ? `<div class="sheet-label grp"><span class="num">${esc(xp.group)}</span><span class="rule"></span></div>` : ""; prev = xp.group || prev; return hd + `
+    const groups = [];
+    list.forEach((xp, i) => { const g = xp.group || ""; let last = groups[groups.length - 1]; if (!last || last.g !== g) { last = { g, items: [] }; groups.push(last); } last.items.push([xp, i]); });
+    container.innerHTML = groups.map((grp) => `<section class="blk"><div class="sheet-label"><span class="num">${esc(grp.g || "Experience")}</span><span class="rule"></span></div>` + grp.items.map(([xp, i]) => `
       <div class="xp-item acc${i === 0 ? " open" : ""}">
         <button class="acc-head" aria-expanded="${i === 0}"><div class="xp-meta"><div class="role">${esc(xp.role)}</div><div class="org">${esc(xp.org)}</div><div class="dates">${esc(xp.dates)}</div></div><span class="chev">+</span></button>
         <div class="acc-body"><div class="acc-inner"><div class="xp-body"><ul>${(xp.bullets || []).map((b) => `<li>${esc(b)}</li>`).join("")}</ul></div></div></div>
-      </div>`; }).join("");
+      </div>`).join("") + `</section>`).join("");
   }
 
   function renderProjects(list) {
@@ -113,7 +117,11 @@
       </div>`).join("");
   }
 
-  function logo(t) { const r = (window.LOGO_RULES || []).find((x) => x[0].test(t)); if (!r) return ""; return window.LOGOS[r[1]] ? `<span class="lg">${window.LOGOS[r[1]]}</span>` : `<span class="lg"><img src="assets/logos/${r[1]}.png" alt="" onerror="this.parentNode.remove()"></span>`; }
+  function logo(t) {
+    const r = (window.LOGO_RULES || []).find((x) => x[0].test(t)); if (!r) return "";
+    if (window.LOGOS[r[1]]) return `<span class="lg">${window.LOGOS[r[1]]}</span>`;
+    return (window.LOGO_FILES || []).includes(r[1]) ? `<span class="lg"><img src="assets/logos/${r[1]}.png" alt="" onerror="this.parentNode.remove()"></span>` : "";
+  }
   function renderSkills(list) {
     const container = document.querySelector("[data-list='skills']");
     if (!container || !list) return;
@@ -153,6 +161,7 @@
     const accs = [...document.querySelectorAll(".acc")]; if (!accs.length) return;
     if (innerHeight + scrollY >= document.documentElement.scrollHeight - 6) { const last = accs[accs.length - 1]; if (!last.classList.contains("open")) { const keep = groupOf(last); accs.forEach((x) => setOpen(x, keep.includes(x))); } return; }
     const y = innerHeight * 0.5; let best = null, bd = Infinity;
+    for (const a of document.querySelectorAll(".acc.open")) { const r = a.getBoundingClientRect(); if (y >= r.top && y <= r.bottom) return; }
     for (const a of accs) { const r = a.getBoundingClientRect(), d = y < r.top ? r.top - y : y > r.bottom ? y - r.bottom : 0; if (d === 0 && a.classList.contains("open")) return; if (d < bd) { bd = d; best = a; } }
     let target = best; const cur = accs.findIndex((x) => x.classList.contains("open")), bi = accs.indexOf(best);
     if (cur >= 0) { const step = accs[0].classList.contains("proj-card") && !single() ? 2 : 1; if (Math.abs(bi - cur) > step) { target = accs[Math.max(0, Math.min(accs.length - 1, cur + (bi > cur ? step : -step)))]; setTimeout(queue, 380); } }

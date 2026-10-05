@@ -27,65 +27,59 @@
 
 <main>
   <div class="wrap">
-    <div class="hero-eyebrow" data-bind="about.eyebrow">Mechanical Engineering — Stevens Institute of Technology</div>
-    <h1 class="name"><span data-bind="about.nameLine1">LIAM</span><br><span class="last" data-bind="about.nameLine2">FARHANGI</span></h1>
-
-    <div data-bind="about.photo"></div>
-
-    <div class="title-block">
-      <div class="tb-row" data-list="about.grid1"></div>
-      <div class="tb-row" data-list="about.grid2"></div>
-    </div>
-
-    <div class="hero-cta">
-      <a class="btn primary" href="contact.html">Get in touch</a>
-      <a class="btn ghost" href="projects.html">View projects</a>
-      <a class="btn ghost" data-resume href="Liam_Farhangi_Resume.pdf" target="_blank" rel="noopener">View resume</a>
-    </div>
-
-    <div style="height:80px;"></div>
-
-    <div class="sheet-label"><span class="num">ABOUT & EDUCATION</span><span class="rule"></span></div>
-    <h2 class="head">Built in the shop, drawn on the screen</h2>
-
-    <div class="about-grid">
-      <div class="about-text">
-        <p data-bind="about.bodyP1"></p>
-      </div>
-
+    <header class="hero">
+      <div class="hero-eyebrow" data-bind="about.eyebrow">Mechanical Engineering — Stevens Institute of Technology</div>
+      <h1 class="name"><span data-bind="about.nameLine1">LIAM</span><br><span class="last" data-bind="about.nameLine2">FARHANGI</span></h1>
+      <div data-bind="about.photo"></div>
       <div class="title-block">
-        <div class="tb-row" style="grid-template-columns:1fr;">
-          <div class="tb-cell"><span class="k">School</span><span class="v" data-bind="about.school"></span></div>
-        </div>
-        <div class="tb-row" style="grid-template-columns:1fr;">
-          <div class="tb-cell"><span class="k">Degree</span><span class="v" data-bind="about.degree"></span></div>
-        </div>
-        <div class="tb-row" style="grid-template-columns:1fr;">
-          <div class="tb-cell"><span class="k">GPA</span><span class="v" data-bind="about.gpa"></span></div>
+        <div class="tb-row" data-list="about.grid1"></div>
+        <div class="tb-row" data-list="about.grid2"></div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn primary" href="contact.html">Get in touch</a>
+        <a class="btn ghost" href="projects.html">View projects</a>
+        <a class="btn ghost" data-resume href="Liam_Farhangi_Resume.pdf" target="_blank" rel="noopener">View resume</a>
+        <span class="reloc"><i></i>Willing to relocate anywhere in the USA</span>
+      </div>
+    </header>
+
+    <div class="gallery" data-list="about.gallery" hidden></div>
+
+    <section class="blk">
+      <div class="sheet-label"><span class="num">ABOUT & EDUCATION</span><span class="rule"></span></div>
+      <h2 class="head">About me</h2>
+      <div class="about-grid">
+        <div class="about-text"><p data-bind="about.bodyP1"></p></div>
+        <div class="title-block">
+          <div class="tb-row" style="grid-template-columns:1fr;"><div class="tb-cell"><span class="k">School</span><span class="v" data-bind="about.school"></span></div></div>
+          <div class="tb-row" style="grid-template-columns:1fr;"><div class="tb-cell"><span class="k">Degree</span><span class="v" data-bind="about.degree"></span></div></div>
+          <div class="tb-row" style="grid-template-columns:1fr;"><div class="tb-cell"><span class="k">GPA</span><span class="v" data-bind="about.gpa"></span></div></div>
         </div>
       </div>
-    </div>
+      <div class="coursework">
+        <span class="k">Relevant Coursework</span>
+        <div class="tag-row" data-list="about.coursework"></div>
+      </div>
+    </section>
 
-    <div class="coursework">
-      <span class="k">Relevant Coursework</span>
-      <div class="tag-row" data-list="about.coursework"></div>
-    </div>
+    <section class="blk">
+      <div class="sheet-label"><span class="num">TIMELINE</span><span class="rule"></span></div>
+      <h2 class="head">My path so far</h2>
+      <div class="htl" data-list="about.timeline"></div>
+      <div class="htl-nav"><button class="htl-btn prev" aria-label="Scroll left">‹</button><button class="htl-btn next" aria-label="Scroll right">›</button></div>
+    </section>
 
-
-    <div style="height:90px;"></div>
-    <div class="sheet-label"><span class="num">TIMELINE</span> MY PATH SO FAR <span class="rule"></span></div>
-    <div class="htl" data-list="about.timeline"></div>
-    <div class="htl-nav"><button class="htl-btn prev" aria-label="Scroll left">‹</button><button class="htl-btn next" aria-label="Scroll right">›</button></div>
-
-    <div style="height:90px;"></div>
-    <div class="sheet-label"><span class="num">IN MY WORDS</span> STATEMENTS <span class="rule"></span></div>
-    <div class="fcf-grid" data-list="about.statements"></div>
-    <div class="coursework"><span class="k">Outside of school</span><div class="tag-row" data-list="about.beyond"></div></div>
+    <section class="blk">
+      <div class="sheet-label"><span class="num">IN MY WORDS</span><span class="rule"></span></div>
+      <h2 class="head">Statements</h2>
+      <div class="fcf-grid stm" data-list="about.statements"></div>
+      <div class="coursework"><span class="k">Outside of school</span><div class="tag-row" data-list="about.beyond"></div></div>
+    </section>
   </div>
 </main>
 
 <footer>LIAM FARHANGI &mdash; MECHANICAL ENGINEERING &mdash; REV. 2026</footer>
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 <script src="fx.js" defer></script>
 </body>
 </html>
