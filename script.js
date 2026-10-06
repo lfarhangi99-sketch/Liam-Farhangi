@@ -15,6 +15,7 @@
       renderProjects(data.projects);
       renderSkills(data.skills);
       renderContact(data.contact);
+      openFromHash();
     })
     .catch((e) => console.warn("content.json not loaded:", e));
 
@@ -91,13 +92,14 @@
     return `<div class="tb-cell"><span class="k">${esc(cell.k)}</span><span class="v${cell.accent ? " accent" : ""}">${esc(cell.v)}</span></div>`;
   }
 
+  const gid = (g) => /^leadership/i.test(g) ? "leadership" : (g.toLowerCase().split(" ")[0] || "experience");
   function renderExperience(list, target) {
     const container = target || document.querySelector("[data-list='experience']");
     if (!container || !list) return;
     const groups = [];
     list.forEach((xp, i) => { const g = xp.group || ""; let last = groups[groups.length - 1]; if (!last || last.g !== g) { last = { g, items: [] }; groups.push(last); } last.items.push([xp, i]); });
-    container.innerHTML = groups.map((grp) => `<section class="blk"><div class="sheet-label"><span class="num">${esc(grp.g || "Experience")}</span><span class="rule"></span></div>` + grp.items.map(([xp, i]) => `
-      <div class="xp-item acc${i === 0 ? " open" : ""}">
+    container.innerHTML = groups.map((grp) => `<section class="blk" id="${gid(grp.g)}"><div class="sheet-label"><span class="num">${esc(grp.g || "Experience")}</span><span class="rule"></span></div>` + grp.items.map(([xp, i]) => `
+      <div id="xp-${i}" class="xp-item acc${i === 0 ? " open" : ""}">
         <button class="acc-head" aria-expanded="${i === 0}"><div class="xp-meta"><div class="role">${esc(xp.role)}</div><div class="org">${esc(xp.org)}</div><div class="dates">${esc(xp.dates)}</div></div><span class="chev">+</span></button>
         <div class="acc-body"><div class="acc-inner"><div class="xp-body"><ul>${(xp.bullets || []).map((b) => `<li>${esc(b)}</li>`).join("")}</ul></div></div></div>
       </div>`).join("") + `</section>`).join("");
@@ -107,7 +109,7 @@
     const container = document.querySelector("[data-list='projects']");
     if (!container || !list) return;
     container.innerHTML = list.map((p, i) => `
-      <div class="proj-card acc${i < (matchMedia("(max-width: 760px)").matches ? 1 : 2) ? " open" : ""}">
+      <div id="proj-${i}" class="proj-card acc${i < (matchMedia("(max-width: 760px)").matches ? 1 : 2) ? " open" : ""}">
         <button class="acc-head" aria-expanded="${i < (matchMedia("(max-width: 760px)").matches ? 1 : 2)}"><div class="ph"><div class="pnum">${String(i + 1).padStart(2, "0")}</div><div><div class="ptitle">${esc(p.title)}</div><div class="prole">${esc(p.role)}</div></div></div><span class="chev">+</span></button>
         <div class="acc-body"><div class="acc-inner"><div class="pb">
           ${p.image ? `<img src="assets/${esc(p.image)}" alt="${esc(p.title)}" class="proj-img">` : ""}
@@ -176,4 +178,23 @@
   });
   addEventListener("scroll", queue, { passive: true }); addEventListener("resize", queue);
   new MutationObserver(queue).observe(document.body, { childList: true, subtree: true });
+  function highlight(root, q) {
+    if (!q) return;
+    const terms = q.toLowerCase().split(/\s+/).filter((t) => t.length > 1).map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")); if (!terms.length) return;
+    const re = new RegExp("(" + terms.join("|") + ")", "ig"), w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), nodes = [];
+    while (w.nextNode()) { const n = w.currentNode; if (re.test(n.nodeValue)) nodes.push(n); re.lastIndex = 0; }
+    nodes.forEach((n) => { const sp = document.createElement("span"); sp.innerHTML = n.nodeValue.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])).replace(re, '<mark class="hit">$1</mark>'); n.replaceWith(sp); });
+    setTimeout(() => root.querySelectorAll("mark.hit").forEach((m) => m.replaceWith(document.createTextNode(m.textContent))), 9000);
+  }
+  function openFromHash() {
+    const id = decodeURIComponent(location.hash.slice(1)); if (!id) return;
+    const el = document.getElementById(id); if (!el) return;
+    const isAcc = el.classList.contains("acc");
+    if (isAcc) { const keep = groupOf(el); document.querySelectorAll(".acc").forEach((x) => setOpen(x, keep.includes(x))); manualUntil = performance.now() + 5000; }
+    setTimeout(() => { el.scrollIntoView({ block: isAcc ? "center" : "start", behavior: "smooth" }); highlight(el, new URLSearchParams(location.search).get("q")); }, 500);
+  }
+  let dragEl = null, dragX = 0, dragLeft = 0;
+  document.addEventListener("pointerdown", (e) => { const t = e.target.closest(".htl"); if (!t || e.pointerType !== "mouse" || e.button || e.target.closest("a,button")) return; dragEl = t; dragX = e.clientX; dragLeft = t.scrollLeft; t.classList.add("drag"); });
+  addEventListener("pointermove", (e) => { if (dragEl) dragEl.scrollLeft = dragLeft - (e.clientX - dragX); });
+  addEventListener("pointerup", () => { if (dragEl) { dragEl.classList.remove("drag"); dragEl = null; } });
 })();
