@@ -1,11 +1,11 @@
 {
   "theme": {
-    "accent": "#c42e45",
-    "accentDim": "#a32638",
-    "bg": "#111316",
-    "panel": "#1b1e23",
-    "paper": "#f2f2f2",
-    "blue": "#5b5f66"
+    "accent": "#E8223B",
+    "accentDim": "#A32638",
+    "bg": "#050B1F",
+    "panel": "#0B1736",
+    "paper": "#F6F3EC",
+    "blue": "#12307A"
   },
   "pages": {
     "about": {
@@ -325,8 +325,7 @@
         ]
       }
     ],
-    "gallery": [],
-    "bodyP2": "undefined"
+    "gallery": []
   },
   "experience": [
     {
@@ -605,10 +604,5 @@
     "linkedinHref": "https://www.linkedin.com/in/liam-farhangi-606486352/",
     "location": "Hoboken, NJ · Highland, NY",
     "resumeFile": ""
-  },
-  "calendar": {
-    "id": "lfarhangi99@gmail.com",
-    "apiKey": "<iframe src=\"https://calendar.google.com/calendar/embed?src=lfarhangi99%40gmail.com&ctz=America%2FNew_York\" style=\"border: 0\" width=\"800\" height=\"600\" frameborder=\"0\" scrolling=\"no\"></iframe>",
-    "labels": "busy"
   }
 }

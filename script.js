@@ -110,7 +110,7 @@
     if (!container || !list) return;
     container.innerHTML = list.map((p, i) => `
       <div id="proj-${i}" class="proj-card acc${i < (matchMedia("(max-width: 760px)").matches ? 1 : 2) ? " open" : ""}">
-        <button class="acc-head" aria-expanded="${i < (matchMedia("(max-width: 760px)").matches ? 1 : 2)}"><div class="ph"><div class="pnum">${String(i + 1).padStart(2, "0")}</div><div><div class="ptitle">${esc(p.title)}</div><div class="prole">${esc(p.role)}</div></div></div><span class="chev">+</span></button>
+        <button class="acc-head" aria-expanded="${i < (matchMedia("(max-width: 760px)").matches ? 1 : 2)}"><div class="ph"><div><div class="ptitle">${esc(p.title)}</div><div class="prole">${esc(p.role)}</div></div></div><span class="chev">+</span></button>
         <div class="acc-body"><div class="acc-inner"><div class="pb">
           ${p.image ? `<img src="assets/${esc(p.image)}" alt="${esc(p.title)}" class="proj-img">` : ""}
           ${(p.paragraphs || []).map((para) => `<p>${esc(para)}</p>`).join("")}

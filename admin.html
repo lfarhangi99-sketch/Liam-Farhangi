@@ -159,16 +159,6 @@
     </div>
 
     <div class="panel">
-      <h3>Weekly Calendar (Google Calendar)</h3>
-      <span class="drag-hint">Shows a "This week" block on the Contact page. Leave the ID blank to hide it.</span>
-      <label>Calendar ID</label><input type="text" id="cal_id" placeholder="something@group.calendar.google.com">
-      <label>Google API key</label><input type="text" id="cal_key" placeholder="AIza...">
-      <label>What visitors see</label>
-      <select id="cal_labels"><option value="titles">Event names</option><option value="busy">Just "Busy" blocks</option></select>
-      <small class="hint">The calendar must be set to public, and the API key must be limited to this website in Google Cloud.</small>
-    </div>
-
-    <div class="panel">
       <h3>Contact</h3>
       <label>Intro line</label><textarea id="contact_lede"></textarea>
       <div class="row2">
@@ -287,7 +277,6 @@ function fillForm() {
 
   renderPagesList();
   renderGallery();
-  const cal = content.calendar || {}; $("cal_id").value = cal.id || ""; $("cal_key").value = cal.apiKey || ""; $("cal_labels").value = cal.labels || "titles";
   renderExperienceList();
   renderProjectsList();
   renderSkillsList();
@@ -528,7 +517,6 @@ function escAttr(s) { return String(s == null ? "" : s).replace(/"/g, "&quot;");
 function escHtml(s) { return String(s == null ? "" : s).replace(/</g, "&lt;"); }
 
 function collectForm() {
-  content.calendar = { id: $("cal_id").value.trim(), apiKey: $("cal_key").value.trim(), labels: $("cal_labels").value };
   THEME_KEYS.forEach((k) => { content.theme[k] = $("theme_" + k).value; });
 
   const a = content.about;

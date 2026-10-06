@@ -4,14 +4,14 @@
 var STATS=[{n:3.58,d:2,l:'GPA / 4.00'},{t:'Junior',l:'Mechanical Engineering'},{n:3,l:'Active roles'}];
 var hn=document.querySelector('h1.name'),body=document.body,nav=document.querySelector('nav'),root=document.documentElement;
 var bar=document.createElement('div');bar.id='progress';body.appendChild(bar);
-if(nav){var wrap=nav.querySelector('.wrap'),mb=document.createElement('button');mb.className='menu-btn';mb.setAttribute('aria-label','Menu');mb.setAttribute('aria-expanded','false');mb.innerHTML='<span></span><span></span><span></span>';wrap.appendChild(mb);
-var closeMenu=function(){nav.classList.remove('nav-open');mb.setAttribute('aria-expanded','false');};
-mb.addEventListener('click',function(){var o=nav.classList.toggle('nav-open');mb.setAttribute('aria-expanded',o);});
-nav.addEventListener('click',function(e){if(e.target.closest('.nav-links a'))closeMenu();});
-document.addEventListener('click',function(e){if(!nav.contains(e.target))closeMenu();});}
+var dd=nav&&nav.querySelector('.has-sub');
+if(dd){var tr=dd.querySelector('.menu-trigger'),shut=function(){dd.classList.remove('open');tr.setAttribute('aria-expanded','false');};
+tr.addEventListener('click',function(e){e.stopPropagation();var op=dd.classList.toggle('open');tr.setAttribute('aria-expanded',op);});
+dd.addEventListener('click',function(e){if(e.target.closest('.sub a'))shut();});
+document.addEventListener('click',function(e){if(!dd.contains(e.target))shut();});}
 var last=0,tick=false;
 function onScroll(){tick=false;var y=scrollY,h=root.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?y/h:0)+')';if(hn&&y<1100)hn.style.translate='0 '+(-y*.08)+'px';
-if(nav&&!nav.classList.contains('nav-open'))nav.classList.toggle('nav-hide',y>last&&y>140);last=y;}
+if(nav&&!nav.querySelector('.has-sub.open'))nav.classList.toggle('nav-hide',y>last&&y>140);last=y;}
 addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(onScroll);}},{passive:true});
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var el=e.target;el.classList.add('in');io.unobserve(el);
 if(el.classList.contains('stat'))count(el.querySelector('.n'));
