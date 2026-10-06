@@ -168,7 +168,7 @@
     const keep = groupOf(target); accs.forEach((x) => setOpen(x, keep.includes(x)));
   };
   const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(sync); } };
-  document.addEventListener("click", (e) => { const hb = e.target.closest(".htl-btn"); if (hb) document.querySelector(".htl").scrollBy({ left: (hb.classList.contains("next") ? 1 : -1) * 340, behavior: "smooth" }); });
+  document.addEventListener("click", (e) => { const hb = e.target.closest(".htl-nav .htl-btn"), tl0 = document.querySelector(".htl"); if (hb && tl0) tl0.scrollBy({ left: (hb.classList.contains("next") ? 1 : -1) * 340, behavior: "smooth" }); });
   document.addEventListener("click", (e) => {
     const h = e.target.closest(".acc-head"); if (!h) return;
     const a = h.closest(".acc"), opening = !a.classList.contains("open"); manualUntil = performance.now() + 3000;

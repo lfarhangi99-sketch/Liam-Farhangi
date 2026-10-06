@@ -604,5 +604,10 @@
     "linkedinHref": "https://www.linkedin.com/in/liam-farhangi-606486352/",
     "location": "Hoboken, NJ · Highland, NY",
     "resumeFile": ""
+  },
+  "calendar": {
+    "id": "lfarhangi99@gmail.com",
+    "apiKey": "",
+    "labels": "titles"
   }
 }
