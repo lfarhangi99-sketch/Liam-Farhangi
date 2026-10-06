@@ -609,6 +609,6 @@
   "calendar": {
     "id": "lfarhangi99@gmail.com",
     "apiKey": "https://calendar.google.com/calendar/u/0?cid=bGZhcmhhbmdpOTlAZ21haWwuY29t",
-    "labels": "titles"
+    "labels": "busy"
   }
 }
