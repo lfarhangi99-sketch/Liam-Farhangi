@@ -190,6 +190,7 @@
     const id = decodeURIComponent(location.hash.slice(1)); if (!id) return;
     const el = document.getElementById(id); if (!el) return;
     const isAcc = el.classList.contains("acc");
+    const fold = el.querySelector(".fold"); if (fold && !fold.classList.contains("open")) fold.querySelector(".fold-btn").click();
     if (isAcc) { const keep = groupOf(el); document.querySelectorAll(".acc").forEach((x) => setOpen(x, keep.includes(x))); manualUntil = performance.now() + 5000; }
     setTimeout(() => { el.scrollIntoView({ block: isAcc ? "center" : "start", behavior: "smooth" }); highlight(el, new URLSearchParams(location.search).get("q")); }, 500);
   }
@@ -197,4 +198,5 @@
   document.addEventListener("pointerdown", (e) => { const t = e.target.closest(".htl"); if (!t || e.pointerType !== "mouse" || e.button || e.target.closest("a,button")) return; dragEl = t; dragX = e.clientX; dragLeft = t.scrollLeft; t.classList.add("drag"); });
   addEventListener("pointermove", (e) => { if (dragEl) dragEl.scrollLeft = dragLeft - (e.clientX - dragX); });
   addEventListener("pointerup", () => { if (dragEl) { dragEl.classList.remove("drag"); dragEl = null; } });
+  document.addEventListener("click", (e) => { const b = e.target.closest(".fold-btn"); if (!b) return; const f = b.parentNode, on = f.classList.toggle("open"); b.setAttribute("aria-expanded", on); b.querySelector(".fold-label").textContent = on ? "Hide statements" : "Read my statements"; });
 })();

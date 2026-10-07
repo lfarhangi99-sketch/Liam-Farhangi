@@ -15,8 +15,8 @@ else:
 
 cal = icalendar.Calendar.from_ical(raw)
 now = dt.datetime.now(TZ)
-start = (now - dt.timedelta(days=14)).replace(hour=0, minute=0, second=0, microsecond=0)
-end = start + dt.timedelta(days=120)
+start = (now - dt.timedelta(days=7)).replace(hour=0, minute=0, second=0, microsecond=0)
+end = start + dt.timedelta(days=200)
 
 busy, allday = [], []
 for e in recurring_ical_events.of(cal).between(start, end):

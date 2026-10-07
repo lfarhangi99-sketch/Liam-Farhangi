@@ -13,7 +13,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="nav-mark"><b>Liam Farhangi</b></div>
+    <a class="nav-mark" href="index.html"><b>Liam Farhangi</b></a>
     <ul class="nav-links">
       <li class="has-sub"><button class="menu-trigger" type="button" aria-haspopup="true" aria-expanded="false"><span>Menu</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l4 4 4-4"/></svg></button><ul class="sub"><li><a href="index.html" class="active">About</a></li><li><a href="experience.html">Experience</a></li><li><a href="projects.html">Projects</a></li><li><a href="skills.html">Skills</a></li><li><a href="contact.html">Contact</a></li><li class="m-only"><a href="admin.html">Admin</a></li></ul></li>
       <li><a href="admin.html" class="admin-btn">Admin</a></li>
@@ -68,7 +68,10 @@
     <section class="blk" id="statements">
       <div class="sheet-label"><span class="num">IN MY WORDS</span><span class="rule"></span></div>
       <h2 class="head">Statements</h2>
-      <div class="fcf-grid stm" data-list="about.statements"></div>
+      <div class="fold" id="stm-fold">
+        <button class="fold-btn" type="button" aria-expanded="false"><span class="fold-label">Read my statements</span><span class="chev"></span></button>
+        <div class="fold-body"><div class="fold-inner"><div class="fcf-grid stm" data-list="about.statements"></div></div></div>
+      </div>
       <div class="coursework"><span class="k">Outside of school</span><div class="tag-row" data-list="about.beyond"></div></div>
     </section>
   </div>

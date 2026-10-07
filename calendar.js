@@ -20,13 +20,16 @@ function draw(days,by,all){var today=ymd(new Date()),nowM=mins(new Date().toISOS
  html+='<div class="gc-row gc-body" style="height:'+rows*PX+'px"><div class="gc-times">'+Array.apply(null,Array(rows-1)).map(function(_,i){return '<span style="top:'+(i+1)*PX+'px">'+hl(lo/60+i+1)+'</span>';}).join('')+'</div>'+
  days.map(function(d){return '<div class="gc-col'+(d===today?' today':'')+'">'+by[d].map(function(e){var h=Math.max((e.b-e.a)/60*PX-2,20);return '<div class="gev" style="top:'+(e.a-lo)/60*PX+'px;height:'+h+'px;left:2px;right:2px"><b>Busy</b>'+(h>34?'<span>'+fmt(e.a)+' – '+fmt(e.b)+'</span>':'')+'</div>';}).join('')+(d===today&&nowM>=lo&&nowM<=hi?'<div class="gnow" style="top:'+(nowM-lo)/60*PX+'px"></div>':'')+'</div>';}).join('')+'</div>';
  $('.gcal-inner').innerHTML=html;}
-fetch('schedule.json?v='+Math.floor(Date.now()/300000)).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(j){
- var mon=monday(ymd(new Date())),days=[0,1,2,3,4,5,6].map(function(i){return addDays(mon,i);}),by={},all={};days.forEach(function(d){by[d]=[];});
- (j.busy||[]).forEach(function(b){var ds=ymd(new Date(b.s)),de=ymd(new Date(b.e)),a=mins(b.s),z=mins(b.e);
+var off=0,MAX=26,J=null;
+function render(){var mon=addDays(monday(ymd(new Date())),off*7),days=[0,1,2,3,4,5,6].map(function(i){return addDays(mon,i);}),by={},all={};days.forEach(function(d){by[d]=[];});
+ (J.busy||[]).forEach(function(b){var ds=ymd(new Date(b.s)),de=ymd(new Date(b.e)),a=mins(b.s),z=mins(b.e);
   if(ds===de){if(by[ds]&&z>a)by[ds].push({a:a,b:z});}
   else{if(by[ds])by[ds].push({a:a,b:1440});for(var d=addDays(ds,1);d<de;d=addDays(d,1))if(by[d])by[d].push({a:0,b:1440});if(by[de]&&z>0)by[de].push({a:0,b:z});}});
- (j.allday||[]).forEach(function(e){for(var d=e.s;d<e.e;d=addDays(d,1))if(by[d])all[d]=1;});
+ (J.allday||[]).forEach(function(e){for(var d=e.s;d<e.e;d=addDays(d,1))if(by[d])all[d]=1;});
  draw(days,by,all);
+ sec.querySelector('[data-d="-1"]').disabled=off<=0;sec.querySelector('[data-d="1"]').disabled=off>=MAX;}
+sec.querySelectorAll('.cal-nav button').forEach(function(b){b.addEventListener('click',function(){var d=+b.dataset.d;off=d===0?0:Math.max(0,Math.min(MAX,off+d));if(J)render();});});
+fetch('schedule.json?v='+Math.floor(Date.now()/300000)).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(j){J=j;render();
  if(j.updated)$('.cal-note').textContent='Times shown in Eastern Time. Last updated '+new Date(j.updated).toLocaleString('en-US',{timeZone:TZ,month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET.';
 }).catch(fail);
 })();

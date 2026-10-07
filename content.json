@@ -1,15 +1,15 @@
 {
   "theme": {
-    "accent": "#d4af37",
-    "accentDim": "#9c7f1f",
-    "bg": "#0a1020",
-    "panel": "#111a30",
-    "paper": "#f5f1e6",
-    "blue": "#1b2f6b"
+    "accent": "#E8223B",
+    "accentDim": "#A32638",
+    "bg": "#050B1F",
+    "panel": "#0B1736",
+    "paper": "#F6F3EC",
+    "blue": "#12307A"
   },
   "pages": {
     "about": {
-      "background": "1791331759098_IMG_8732.HEIC",
+      "background": "",
       "align": "left"
     },
     "experience": {
@@ -325,8 +325,7 @@
         ]
       }
     ],
-    "gallery": [],
-    "bodyP2": "undefined"
+    "gallery": []
   },
   "experience": [
     {

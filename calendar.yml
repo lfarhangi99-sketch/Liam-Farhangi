@@ -1,7 +1,11 @@
 name: Sync calendar
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "17 * * * *"   # every hour
+  push:
+    paths:
+      - ".github/workflows/calendar.yml"
+      - "scripts/sync_calendar.py"
   workflow_dispatch:
 permissions:
   contents: write
@@ -16,7 +20,7 @@ jobs:
       - run: pip install icalendar recurring-ical-events
       - run: python scripts/sync_calendar.py
         env:
-          CALENDAR_ICS_URL: ${{ secrets.CALENDAR_ICS_URL }}
+          CALENDAR_ICS_URL: ${{ secrets.CALENDAR_ICS_URL || 'https://calendar.google.com/calendar/ical/lfarhangi99%40gmail.com/public/basic.ics' }}
       - run: |
           git config user.name "calendar-bot"
           git config user.email "calendar-bot@users.noreply.github.com"
