@@ -1,11 +1,11 @@
 {
   "theme": {
-    "accent": "#E8223B",
-    "accentDim": "#A32638",
-    "bg": "#050B1F",
-    "panel": "#0B1736",
-    "paper": "#F6F3EC",
-    "blue": "#12307A"
+    "accent": "#e8223b",
+    "accentDim": "#a32638",
+    "bg": "#050b1f",
+    "panel": "#0b1736",
+    "paper": "#f6f3ec",
+    "blue": "#12307a"
   },
   "pages": {
     "about": {
@@ -325,7 +325,8 @@
         ]
       }
     ],
-    "gallery": []
+    "gallery": [],
+    "bodyP2": "undefined"
   },
   "experience": [
     {
